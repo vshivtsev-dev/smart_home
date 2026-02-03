@@ -1,5 +1,5 @@
-import {auth} from "utils/auth/auth";
-import {prisma} from "utils/db/prisma/prisma";
+import {auth} from "@/utils/auth/auth";
+import {prisma} from "@/utils/db/prisma/prisma";
 
 async function esp32_1() {
   const esp32_1 = await prisma.device.create({

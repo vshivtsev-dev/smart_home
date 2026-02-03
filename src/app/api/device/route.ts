@@ -1,4 +1,4 @@
-import {getDevicesData} from "src/app/api/device/service";
+import {getDevicesData} from "@/app/api/device/service";
 
 export async function GET() {
   await getDevicesData();

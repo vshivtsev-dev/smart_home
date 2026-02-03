@@ -1,9 +1,9 @@
 import type {PrismaPg} from "@prisma/adapter-pg";
 import type {DefaultArgs, GetFindResult, PrismaClientOptions,} from "@prisma/client/runtime/client";
-import type {$DevicePayload} from "generated/prisma/models/Device";
-import {insertClimate} from "src/app/api/device/index";
-import type {ClimateResponse, DeviceBody, DeviceResponse, SensorData, SoilResponse,} from "src/app/api/device/model";
-import {prisma} from "utils/db/prisma/prisma";
+import {insertClimate} from "@/app/api/device/index";
+import type {ClimateResponse, DeviceBody, DeviceResponse, SensorData, SoilResponse,} from "@/app/api/device/model";
+import type {$DevicePayload} from "@/generated/prisma/models/Device";
+import {prisma} from "@/utils/db/prisma/prisma";
 
 async function postToDevice(
   ip: string,

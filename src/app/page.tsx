@@ -1,6 +1,6 @@
 "use client";
 
-import {authClient} from "utils/auth/auth-client";
+import {authClient} from "@/utils/auth/auth-client";
 
 export default function Home() {
   function signUp() {

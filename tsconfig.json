@@ -19,11 +19,9 @@
       }
     ],
     "paths": {
-      "src/*": ["./src/*"],
-      "utils/*": ["./src/utils/*"],
-      "generated/*": ["./generated/*"]
-    },
-    "ignoreDeprecations": "6.0"
+      "@/*": ["./src/*"],
+      "@/generated/*": ["./generated/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
