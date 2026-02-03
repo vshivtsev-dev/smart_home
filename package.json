@@ -7,9 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "auth-generate": "bunx @better-auth/cli generate --config ./src/utils/auth/auth.ts --output ./prisma/models/auth.prisma",
+    "prisma-push-force": "prisma db push --schema ./prisma/models/auth.prisma --force-reset"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.3.0",
+    "@prisma/client": "^7.3.0",
+    "better-auth": "^1.4.18",
+    "dotenv": "^17.2.3",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
