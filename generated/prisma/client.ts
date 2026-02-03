@@ -59,3 +59,33 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Climate
+ * 
+ */
+export type Climate = Prisma.ClimateModel
+/**
+ * Model Soil
+ * 
+ */
+export type Soil = Prisma.SoilModel
+/**
+ * Model Device
+ * 
+ */
+export type Device = Prisma.DeviceModel
+/**
+ * Model Sensor
+ * 
+ */
+export type Sensor = Prisma.SensorModel
+/**
+ * Model DeviceFunction
+ * 
+ */
+export type DeviceFunction = Prisma.DeviceFunctionModel
+/**
+ * Model FunctionConfig
+ * 
+ */
+export type FunctionConfig = Prisma.FunctionConfigModel

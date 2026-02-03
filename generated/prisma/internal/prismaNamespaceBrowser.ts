@@ -54,7 +54,13 @@ export const ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Climate: 'Climate',
+  Soil: 'Soil',
+  Device: 'Device',
+  Sensor: 'Sensor',
+  DeviceFunction: 'DeviceFunction',
+  FunctionConfig: 'FunctionConfig'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -134,6 +140,67 @@ export const VerificationScalarFieldEnum = {
 } as const
 
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+export const ClimateScalarFieldEnum = {
+  id: 'id',
+  sensorId: 'sensorId',
+  temperature: 'temperature',
+  humidity: 'humidity',
+  createdAt: 'createdAt'
+} as const
+
+export type ClimateScalarFieldEnum = (typeof ClimateScalarFieldEnum)[keyof typeof ClimateScalarFieldEnum]
+
+
+export const SoilScalarFieldEnum = {
+  id: 'id',
+  sensorId: 'sensorId',
+  moisture: 'moisture',
+  sensorValue: 'sensorValue',
+  duration: 'duration',
+  createdAt: 'createdAt'
+} as const
+
+export type SoilScalarFieldEnum = (typeof SoilScalarFieldEnum)[keyof typeof SoilScalarFieldEnum]
+
+
+export const DeviceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  ip: 'ip'
+} as const
+
+export type DeviceScalarFieldEnum = (typeof DeviceScalarFieldEnum)[keyof typeof DeviceScalarFieldEnum]
+
+
+export const SensorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  target: 'target',
+  sensorType: 'sensorType'
+} as const
+
+export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
+
+
+export const DeviceFunctionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  target: 'target',
+  functionType: 'functionType'
+} as const
+
+export type DeviceFunctionScalarFieldEnum = (typeof DeviceFunctionScalarFieldEnum)[keyof typeof DeviceFunctionScalarFieldEnum]
+
+
+export const FunctionConfigScalarFieldEnum = {
+  id: 'id',
+  duration: 'duration',
+  minMoisture: 'minMoisture'
+} as const
+
+export type FunctionConfigScalarFieldEnum = (typeof FunctionConfigScalarFieldEnum)[keyof typeof FunctionConfigScalarFieldEnum]
 
 
 export const SortOrder = {

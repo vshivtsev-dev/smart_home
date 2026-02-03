@@ -1,0 +1,95 @@
+enum SensorType {
+  CLIMATE
+  SOIL
+
+  @@schema("public")
+}
+
+enum SensorName {
+  BME_280
+  DHT_11
+  SOIL
+
+  @@schema("public")
+}
+
+enum FunctionType {
+  PUMP
+
+  @@schema("public")
+}
+
+model Climate {
+  id          Int       @id @default(autoincrement())
+  sensorId    Int
+  temperature Float
+  humidity    Float
+  createdAt   DateTime? @default(now())
+
+  sensor Sensor @relation(fields: [sensorId], references: [id])
+
+  @@index([sensorId])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model Soil {
+  id          Int       @id @default(autoincrement())
+  sensorId    Int
+  moisture    Float
+  sensorValue Float
+  duration    Float
+  createdAt   DateTime? @default(now())
+
+  sensor Sensor @relation(fields: [sensorId], references: [id])
+
+  @@index([sensorId])
+  @@index([createdAt])
+  @@schema("public")
+}
+
+model Device {
+  id   Int    @id @default(autoincrement())
+  name String
+  ip   String
+
+  sensors         Sensor[]
+  deviceFunctions DeviceFunction[]
+
+  @@schema("public")
+}
+
+model Sensor {
+  id         Int        @id @default(autoincrement())
+  name       SensorName
+  target     String
+  sensorType SensorType
+
+  climates Climate[]
+  soils    Soil[]
+  devices  Device[]
+
+  @@schema("public")
+}
+
+model DeviceFunction {
+  id           Int          @id @default(autoincrement())
+  name         String
+  target       String
+  functionType FunctionType
+
+  devices Device[]
+  config  FunctionConfig[]
+
+  @@schema("public")
+}
+
+model FunctionConfig {
+  id          Int  @id @default(autoincrement())
+  duration    Int?
+  minMoisture Int?
+
+  DeviceFunction DeviceFunction[]
+
+  @@schema("public")
+}

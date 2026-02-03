@@ -1,13 +1,3 @@
-generator client {
-  provider = "prisma-client"
-  output   = "../../generated/prisma/auth"
-}
-
-datasource db_auth {
-  provider = "postgresql"
-  schemas  = ["auth"]
-}
-
 model User {
   id            String    @id
   name          String
