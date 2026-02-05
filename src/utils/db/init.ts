@@ -28,7 +28,7 @@ async function esp32_1() {
   console.log(esp32_1.name, bme280.name);
 }
 
-esp32_1();
+await esp32_1();
 
 async function esp32_2() {
   const esp32_2 = await prisma.device.create({
@@ -57,7 +57,7 @@ async function esp32_2() {
   console.log(esp32_2.name, bme280.name);
 }
 
-esp32_2();
+await esp32_2();
 
 async function uno_r4_wifi_1() {
   const uno_r4_wifi_1 = await prisma.device.create({
@@ -85,7 +85,7 @@ async function uno_r4_wifi_1() {
   });
   const pumpConfig = await prisma.functionConfig.create({
     data: {
-      duration: 100,
+      duration: 400,
       minMoisture: 20,
     },
   });
@@ -113,7 +113,7 @@ async function uno_r4_wifi_1() {
   console.log(uno_r4_wifi_1.name);
 }
 
-uno_r4_wifi_1();
+await uno_r4_wifi_1();
 
 async function testUser() {
   const newUser = await auth.api.signUpEmail({
@@ -126,4 +126,4 @@ async function testUser() {
   console.log(newUser.user.email);
 }
 
-testUser();
+await testUser();
