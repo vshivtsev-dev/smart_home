@@ -1,4 +1,4 @@
-import {auth} from "@/utils/auth/auth";
+import {auth} from "@/lib/auth";
 import {prisma} from "@/utils/db/prisma/prisma";
 
 async function esp32_1() {

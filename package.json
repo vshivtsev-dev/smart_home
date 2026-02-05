@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome format --write",
-    "auth-generate": "bunx @better-auth/cli generate --config ./src/utils/auth/auth.ts --output ./prisma/models/auth.prisma",
+    "auth-generate": "bunx @better-auth/cli generate --output ./prisma/models/auth.prisma",
     "prisma-push-force": "prisma db push --force-reset"
   },
   "dependencies": {

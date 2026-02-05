@@ -1,5 +1,6 @@
 import {betterAuth} from "better-auth";
 import {prismaAdapter} from "better-auth/adapters/prisma";
+import {nextCookies} from "better-auth/next-js";
 import {admin} from "better-auth/plugins";
 import {prisma} from "@/utils/db/prisma/prisma";
 
@@ -10,5 +11,5 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  plugins: [admin()],
+  plugins: [admin(), nextCookies()],
 });
