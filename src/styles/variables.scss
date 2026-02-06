@@ -1,0 +1,19 @@
+:root {
+  //color
+  --primary-color: #999;
+  --primary-bg-color: #222;
+  @media (prefers-color-scheme: light) {
+    --primary-bg-color: #999;
+    --primary-color: #222;
+  }
+  //font-size
+  --primary-fs: 16px;
+
+  //gap
+  --gap-s: 5px;
+  --gap: 10px;
+  --gap-m: 20px;
+  --gap-l: 40px;
+}
+
+

@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
-import "./globals.css";
-import Link from "next/link";
+import "@/styles/main.scss";
+import SideBar from "@/components/sideBar/SideBar";
 
 export const metadata: Metadata = {
   title: "Smart Home",
@@ -15,13 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <p>
-          <Link href={"/dashboard"}>dashboard</Link>
-        </p>
-        <p>
-          <Link href={"/sign-in"}>sign-in</Link>
-        </p>
-        {children}
+        <SideBar />
+        <main>{children}</main>
       </body>
     </html>
   );

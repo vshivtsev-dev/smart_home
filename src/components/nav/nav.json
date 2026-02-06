@@ -1,0 +1,5 @@
+[
+  { "title": "dashboard", "link": "/dashboard" },
+  { "title": "devices", "link": "/devices" },
+  { "title": "sign-in", "link": "/sign-in" }
+]

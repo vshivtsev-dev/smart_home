@@ -13,11 +13,9 @@ export default function Home() {
   }
   return (
     <div>
-      <main>
-        <button type={"button"} onClick={() => signUp()}>
-          signUp
-        </button>
-      </main>
+      <button type={"button"} onClick={() => signUp()}>
+        signUp
+      </button>
     </div>
   );
 }
