@@ -3,7 +3,7 @@ import {prisma} from "@/utils/db/prisma/prisma";
 export default async function Devices() {
   const devices = await prisma.device.findMany({
     orderBy: {
-      id: "desc",
+      id: "asc",
     },
     include: {
       sensors: true,
