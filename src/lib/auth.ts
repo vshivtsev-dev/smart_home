@@ -12,4 +12,10 @@ export const auth = betterAuth({
     enabled: true,
   },
   plugins: [admin(), nextCookies()],
+  trustedOrigins: [
+    `http://localhost:${process.env.PORT}`,
+    `http://192.168.0.*:${process.env.PORT}`,
+    `http://${process.env.URL}:${process.env.PORT}`,
+    `https://${process.env.DOMAIN}`,
+  ],
 });
