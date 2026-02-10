@@ -11,6 +11,7 @@ export async function proxy(request: NextRequest) {
   // This is the recommended approach to optimistically redirect users
   // We recommend handling auth checks in each page/route
   // https://www.better-auth.com/docs/integrations/next#how-to-handle-auth-checks-in-each-pageroute
+
   if (!session) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
@@ -19,5 +20,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard"], // Specify the routes the middleware applies to
+  matcher: ["/dashboard"],
 };

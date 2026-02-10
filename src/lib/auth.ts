@@ -17,5 +17,6 @@ export const auth = betterAuth({
     `http://192.168.0.*:${process.env.PORT}`,
     `http://${process.env.URL}:${process.env.PORT}`,
     `https://${process.env.DOMAIN}`,
+    `https://*.${process.env.DOMAIN}`,
   ],
 });
