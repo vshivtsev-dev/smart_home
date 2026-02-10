@@ -29,9 +29,8 @@ RUN bun run build
 FROM base AS runner
 WORKDIR /app
 
-ENV NEXT_TELEMETRY_DISABLED=1
-
-ENV NODE_ENV=production \
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NODE_ENV=production \
     PORT=$PORT \
     HOSTNAME="0.0.0.0"
 

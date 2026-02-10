@@ -196,7 +196,7 @@ export type ClimateGroupByOutputType = {
   sensorId: number
   temperature: number
   humidity: number
-  createdAt: Date | null
+  createdAt: Date
   _count: ClimateCountAggregateOutputType | null
   _avg: ClimateAvgAggregateOutputType | null
   _sum: ClimateSumAggregateOutputType | null
@@ -227,7 +227,7 @@ export type ClimateWhereInput = {
   sensorId?: Prisma.IntFilter<"Climate"> | number
   temperature?: Prisma.FloatFilter<"Climate"> | number
   humidity?: Prisma.FloatFilter<"Climate"> | number
-  createdAt?: Prisma.DateTimeNullableFilter<"Climate"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Climate"> | Date | string
   sensor?: Prisma.XOR<Prisma.SensorScalarRelationFilter, Prisma.SensorWhereInput>
 }
 
@@ -236,7 +236,7 @@ export type ClimateOrderByWithRelationInput = {
   sensorId?: Prisma.SortOrder
   temperature?: Prisma.SortOrder
   humidity?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   sensor?: Prisma.SensorOrderByWithRelationInput
 }
 
@@ -248,7 +248,7 @@ export type ClimateWhereUniqueInput = Prisma.AtLeast<{
   sensorId?: Prisma.IntFilter<"Climate"> | number
   temperature?: Prisma.FloatFilter<"Climate"> | number
   humidity?: Prisma.FloatFilter<"Climate"> | number
-  createdAt?: Prisma.DateTimeNullableFilter<"Climate"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Climate"> | Date | string
   sensor?: Prisma.XOR<Prisma.SensorScalarRelationFilter, Prisma.SensorWhereInput>
 }, "id">
 
@@ -257,7 +257,7 @@ export type ClimateOrderByWithAggregationInput = {
   sensorId?: Prisma.SortOrder
   temperature?: Prisma.SortOrder
   humidity?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.ClimateCountOrderByAggregateInput
   _avg?: Prisma.ClimateAvgOrderByAggregateInput
   _max?: Prisma.ClimateMaxOrderByAggregateInput
@@ -273,13 +273,13 @@ export type ClimateScalarWhereWithAggregatesInput = {
   sensorId?: Prisma.IntWithAggregatesFilter<"Climate"> | number
   temperature?: Prisma.FloatWithAggregatesFilter<"Climate"> | number
   humidity?: Prisma.FloatWithAggregatesFilter<"Climate"> | number
-  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Climate"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Climate"> | Date | string
 }
 
 export type ClimateCreateInput = {
   temperature: number
   humidity: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
   sensor: Prisma.SensorCreateNestedOneWithoutClimatesInput
 }
 
@@ -288,13 +288,13 @@ export type ClimateUncheckedCreateInput = {
   sensorId: number
   temperature: number
   humidity: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type ClimateUpdateInput = {
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sensor?: Prisma.SensorUpdateOneRequiredWithoutClimatesNestedInput
 }
 
@@ -303,7 +303,7 @@ export type ClimateUncheckedUpdateInput = {
   sensorId?: Prisma.IntFieldUpdateOperationsInput | number
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClimateCreateManyInput = {
@@ -311,13 +311,13 @@ export type ClimateCreateManyInput = {
   sensorId: number
   temperature: number
   humidity: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type ClimateUpdateManyMutationInput = {
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClimateUncheckedUpdateManyInput = {
@@ -325,7 +325,7 @@ export type ClimateUncheckedUpdateManyInput = {
   sensorId?: Prisma.IntFieldUpdateOperationsInput | number
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClimateCountOrderByAggregateInput = {
@@ -437,14 +437,14 @@ export type ClimateUncheckedUpdateManyWithoutSensorNestedInput = {
 export type ClimateCreateWithoutSensorInput = {
   temperature: number
   humidity: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type ClimateUncheckedCreateWithoutSensorInput = {
   id?: number
   temperature: number
   humidity: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type ClimateCreateOrConnectWithoutSensorInput = {
@@ -481,34 +481,34 @@ export type ClimateScalarWhereInput = {
   sensorId?: Prisma.IntFilter<"Climate"> | number
   temperature?: Prisma.FloatFilter<"Climate"> | number
   humidity?: Prisma.FloatFilter<"Climate"> | number
-  createdAt?: Prisma.DateTimeNullableFilter<"Climate"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Climate"> | Date | string
 }
 
 export type ClimateCreateManySensorInput = {
   id?: number
   temperature: number
   humidity: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type ClimateUpdateWithoutSensorInput = {
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClimateUncheckedUpdateWithoutSensorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClimateUncheckedUpdateManyWithoutSensorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   temperature?: Prisma.FloatFieldUpdateOperationsInput | number
   humidity?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -569,7 +569,7 @@ export type $ClimatePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     sensorId: number
     temperature: number
     humidity: number
-    createdAt: Date | null
+    createdAt: Date
   }, ExtArgs["result"]["climate"]>
   composites: {}
 }

@@ -20,11 +20,11 @@ enum FunctionType {
 }
 
 model Climate {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   sensorId    Int
   temperature Float
   humidity    Float
-  createdAt   DateTime? @default(now())
+  createdAt   DateTime @default(now())
 
   sensor Sensor @relation(fields: [sensorId], references: [id])
 
@@ -34,12 +34,12 @@ model Climate {
 }
 
 model Soil {
-  id          Int       @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   sensorId    Int
   moisture    Float
   sensorValue Float
   duration    Float
-  createdAt   DateTime? @default(now())
+  createdAt   DateTime @default(now())
 
   sensor Sensor @relation(fields: [sensorId], references: [id])
 
@@ -85,9 +85,9 @@ model DeviceFunction {
 }
 
 model FunctionConfig {
-  id          Int  @id @default(autoincrement())
-  duration    Int?
-  minMoisture Int?
+  id          Int @id @default(autoincrement())
+  duration    Int
+  minMoisture Int
 
   DeviceFunction DeviceFunction[]
 

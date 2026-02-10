@@ -207,7 +207,7 @@ export type SoilGroupByOutputType = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt: Date | null
+  createdAt: Date
   _count: SoilCountAggregateOutputType | null
   _avg: SoilAvgAggregateOutputType | null
   _sum: SoilSumAggregateOutputType | null
@@ -239,7 +239,7 @@ export type SoilWhereInput = {
   moisture?: Prisma.FloatFilter<"Soil"> | number
   sensorValue?: Prisma.FloatFilter<"Soil"> | number
   duration?: Prisma.FloatFilter<"Soil"> | number
-  createdAt?: Prisma.DateTimeNullableFilter<"Soil"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Soil"> | Date | string
   sensor?: Prisma.XOR<Prisma.SensorScalarRelationFilter, Prisma.SensorWhereInput>
 }
 
@@ -249,7 +249,7 @@ export type SoilOrderByWithRelationInput = {
   moisture?: Prisma.SortOrder
   sensorValue?: Prisma.SortOrder
   duration?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   sensor?: Prisma.SensorOrderByWithRelationInput
 }
 
@@ -262,7 +262,7 @@ export type SoilWhereUniqueInput = Prisma.AtLeast<{
   moisture?: Prisma.FloatFilter<"Soil"> | number
   sensorValue?: Prisma.FloatFilter<"Soil"> | number
   duration?: Prisma.FloatFilter<"Soil"> | number
-  createdAt?: Prisma.DateTimeNullableFilter<"Soil"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Soil"> | Date | string
   sensor?: Prisma.XOR<Prisma.SensorScalarRelationFilter, Prisma.SensorWhereInput>
 }, "id">
 
@@ -272,7 +272,7 @@ export type SoilOrderByWithAggregationInput = {
   moisture?: Prisma.SortOrder
   sensorValue?: Prisma.SortOrder
   duration?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.SoilCountOrderByAggregateInput
   _avg?: Prisma.SoilAvgOrderByAggregateInput
   _max?: Prisma.SoilMaxOrderByAggregateInput
@@ -289,14 +289,14 @@ export type SoilScalarWhereWithAggregatesInput = {
   moisture?: Prisma.FloatWithAggregatesFilter<"Soil"> | number
   sensorValue?: Prisma.FloatWithAggregatesFilter<"Soil"> | number
   duration?: Prisma.FloatWithAggregatesFilter<"Soil"> | number
-  createdAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Soil"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Soil"> | Date | string
 }
 
 export type SoilCreateInput = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
   sensor: Prisma.SensorCreateNestedOneWithoutSoilsInput
 }
 
@@ -306,14 +306,14 @@ export type SoilUncheckedCreateInput = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type SoilUpdateInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sensor?: Prisma.SensorUpdateOneRequiredWithoutSoilsNestedInput
 }
 
@@ -323,7 +323,7 @@ export type SoilUncheckedUpdateInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SoilCreateManyInput = {
@@ -332,14 +332,14 @@ export type SoilCreateManyInput = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type SoilUpdateManyMutationInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SoilUncheckedUpdateManyInput = {
@@ -348,7 +348,7 @@ export type SoilUncheckedUpdateManyInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SoilCountOrderByAggregateInput = {
@@ -450,7 +450,7 @@ export type SoilCreateWithoutSensorInput = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type SoilUncheckedCreateWithoutSensorInput = {
@@ -458,7 +458,7 @@ export type SoilUncheckedCreateWithoutSensorInput = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type SoilCreateOrConnectWithoutSensorInput = {
@@ -496,7 +496,7 @@ export type SoilScalarWhereInput = {
   moisture?: Prisma.FloatFilter<"Soil"> | number
   sensorValue?: Prisma.FloatFilter<"Soil"> | number
   duration?: Prisma.FloatFilter<"Soil"> | number
-  createdAt?: Prisma.DateTimeNullableFilter<"Soil"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"Soil"> | Date | string
 }
 
 export type SoilCreateManySensorInput = {
@@ -504,14 +504,14 @@ export type SoilCreateManySensorInput = {
   moisture: number
   sensorValue: number
   duration: number
-  createdAt?: Date | string | null
+  createdAt?: Date | string
 }
 
 export type SoilUpdateWithoutSensorInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SoilUncheckedUpdateWithoutSensorInput = {
@@ -519,7 +519,7 @@ export type SoilUncheckedUpdateWithoutSensorInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SoilUncheckedUpdateManyWithoutSensorInput = {
@@ -527,7 +527,7 @@ export type SoilUncheckedUpdateManyWithoutSensorInput = {
   moisture?: Prisma.FloatFieldUpdateOperationsInput | number
   sensorValue?: Prisma.FloatFieldUpdateOperationsInput | number
   duration?: Prisma.FloatFieldUpdateOperationsInput | number
-  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -593,7 +593,7 @@ export type $SoilPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     moisture: number
     sensorValue: number
     duration: number
-    createdAt: Date | null
+    createdAt: Date
   }, ExtArgs["result"]["soil"]>
   composites: {}
 }

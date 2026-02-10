@@ -177,8 +177,8 @@ export type FunctionConfigGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type FunctionConfigGroupByOutputType = {
   id: number
-  duration: number | null
-  minMoisture: number | null
+  duration: number
+  minMoisture: number
   _count: FunctionConfigCountAggregateOutputType | null
   _avg: FunctionConfigAvgAggregateOutputType | null
   _sum: FunctionConfigSumAggregateOutputType | null
@@ -206,15 +206,15 @@ export type FunctionConfigWhereInput = {
   OR?: Prisma.FunctionConfigWhereInput[]
   NOT?: Prisma.FunctionConfigWhereInput | Prisma.FunctionConfigWhereInput[]
   id?: Prisma.IntFilter<"FunctionConfig"> | number
-  duration?: Prisma.IntNullableFilter<"FunctionConfig"> | number | null
-  minMoisture?: Prisma.IntNullableFilter<"FunctionConfig"> | number | null
+  duration?: Prisma.IntFilter<"FunctionConfig"> | number
+  minMoisture?: Prisma.IntFilter<"FunctionConfig"> | number
   DeviceFunction?: Prisma.DeviceFunctionListRelationFilter
 }
 
 export type FunctionConfigOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  duration?: Prisma.SortOrderInput | Prisma.SortOrder
-  minMoisture?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  minMoisture?: Prisma.SortOrder
   DeviceFunction?: Prisma.DeviceFunctionOrderByRelationAggregateInput
 }
 
@@ -223,15 +223,15 @@ export type FunctionConfigWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FunctionConfigWhereInput | Prisma.FunctionConfigWhereInput[]
   OR?: Prisma.FunctionConfigWhereInput[]
   NOT?: Prisma.FunctionConfigWhereInput | Prisma.FunctionConfigWhereInput[]
-  duration?: Prisma.IntNullableFilter<"FunctionConfig"> | number | null
-  minMoisture?: Prisma.IntNullableFilter<"FunctionConfig"> | number | null
+  duration?: Prisma.IntFilter<"FunctionConfig"> | number
+  minMoisture?: Prisma.IntFilter<"FunctionConfig"> | number
   DeviceFunction?: Prisma.DeviceFunctionListRelationFilter
 }, "id">
 
 export type FunctionConfigOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  duration?: Prisma.SortOrderInput | Prisma.SortOrder
-  minMoisture?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration?: Prisma.SortOrder
+  minMoisture?: Prisma.SortOrder
   _count?: Prisma.FunctionConfigCountOrderByAggregateInput
   _avg?: Prisma.FunctionConfigAvgOrderByAggregateInput
   _max?: Prisma.FunctionConfigMaxOrderByAggregateInput
@@ -244,51 +244,51 @@ export type FunctionConfigScalarWhereWithAggregatesInput = {
   OR?: Prisma.FunctionConfigScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FunctionConfigScalarWhereWithAggregatesInput | Prisma.FunctionConfigScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"FunctionConfig"> | number
-  duration?: Prisma.IntNullableWithAggregatesFilter<"FunctionConfig"> | number | null
-  minMoisture?: Prisma.IntNullableWithAggregatesFilter<"FunctionConfig"> | number | null
+  duration?: Prisma.IntWithAggregatesFilter<"FunctionConfig"> | number
+  minMoisture?: Prisma.IntWithAggregatesFilter<"FunctionConfig"> | number
 }
 
 export type FunctionConfigCreateInput = {
-  duration?: number | null
-  minMoisture?: number | null
+  duration: number
+  minMoisture: number
   DeviceFunction?: Prisma.DeviceFunctionCreateNestedManyWithoutConfigInput
 }
 
 export type FunctionConfigUncheckedCreateInput = {
   id?: number
-  duration?: number | null
-  minMoisture?: number | null
+  duration: number
+  minMoisture: number
   DeviceFunction?: Prisma.DeviceFunctionUncheckedCreateNestedManyWithoutConfigInput
 }
 
 export type FunctionConfigUpdateInput = {
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
   DeviceFunction?: Prisma.DeviceFunctionUpdateManyWithoutConfigNestedInput
 }
 
 export type FunctionConfigUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
   DeviceFunction?: Prisma.DeviceFunctionUncheckedUpdateManyWithoutConfigNestedInput
 }
 
 export type FunctionConfigCreateManyInput = {
   id?: number
-  duration?: number | null
-  minMoisture?: number | null
+  duration: number
+  minMoisture: number
 }
 
 export type FunctionConfigUpdateManyMutationInput = {
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FunctionConfigUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FunctionConfigListRelationFilter = {
@@ -369,23 +369,15 @@ export type FunctionConfigUncheckedUpdateManyWithoutDeviceFunctionNestedInput = 
   deleteMany?: Prisma.FunctionConfigScalarWhereInput | Prisma.FunctionConfigScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type FunctionConfigCreateWithoutDeviceFunctionInput = {
-  duration?: number | null
-  minMoisture?: number | null
+  duration: number
+  minMoisture: number
 }
 
 export type FunctionConfigUncheckedCreateWithoutDeviceFunctionInput = {
   id?: number
-  duration?: number | null
-  minMoisture?: number | null
+  duration: number
+  minMoisture: number
 }
 
 export type FunctionConfigCreateOrConnectWithoutDeviceFunctionInput = {
@@ -414,25 +406,25 @@ export type FunctionConfigScalarWhereInput = {
   OR?: Prisma.FunctionConfigScalarWhereInput[]
   NOT?: Prisma.FunctionConfigScalarWhereInput | Prisma.FunctionConfigScalarWhereInput[]
   id?: Prisma.IntFilter<"FunctionConfig"> | number
-  duration?: Prisma.IntNullableFilter<"FunctionConfig"> | number | null
-  minMoisture?: Prisma.IntNullableFilter<"FunctionConfig"> | number | null
+  duration?: Prisma.IntFilter<"FunctionConfig"> | number
+  minMoisture?: Prisma.IntFilter<"FunctionConfig"> | number
 }
 
 export type FunctionConfigUpdateWithoutDeviceFunctionInput = {
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FunctionConfigUncheckedUpdateWithoutDeviceFunctionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FunctionConfigUncheckedUpdateManyWithoutDeviceFunctionInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  duration?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  minMoisture?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  minMoisture?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -507,8 +499,8 @@ export type $FunctionConfigPayload<ExtArgs extends runtime.Types.Extensions.Inte
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    duration: number | null
-    minMoisture: number | null
+    duration: number
+    minMoisture: number
   }, ExtArgs["result"]["functionConfig"]>
   composites: {}
 }
@@ -1154,7 +1146,7 @@ export type FunctionConfigCreateArgs<ExtArgs extends runtime.Types.Extensions.In
   /**
    * The data needed to create a FunctionConfig.
    */
-  data?: Prisma.XOR<Prisma.FunctionConfigCreateInput, Prisma.FunctionConfigUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.FunctionConfigCreateInput, Prisma.FunctionConfigUncheckedCreateInput>
 }
 
 /**
