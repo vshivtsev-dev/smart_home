@@ -1,16 +1,17 @@
 .nav {
-  ul {
+  &__list {
     list-style: none;
     display: flex;
     flex-direction: column;
   }
 
-  li {
-    padding: var(--gap-s) var(--gap);
+  &__link {
+    display: block;
     box-sizing: border-box;
+    padding: var(--gap) var(--gap);
 
     &:hover {
-      background-color: dimgrey;
+      background-color: var(--primary-bg-color-hover);
     }
   }
 }

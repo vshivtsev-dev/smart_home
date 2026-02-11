@@ -1,6 +1,6 @@
 import {prisma} from "@/utils/db/prisma/prisma";
 
-export default async function Devices() {
+export default async function () {
   const devices = await prisma.device.findMany({
     orderBy: {
       id: "asc",

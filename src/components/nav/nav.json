@@ -1,6 +1,6 @@
 [
-  { "title": "dashboard", "link": "/dashboard" },
-  { "title": "devices", "link": "/devices" },
-  { "title": "sign-in", "link": "/sign-in" },
-  { "title": "climat", "link": "/climat" }
+  { "title": "Sign-in", "link": "/sign-in" },
+  { "title": "Devices", "link": "/devices" },
+  { "title": "Climats", "link": "/climats" },
+  { "title": "Plants", "link": "/plants" }
 ]

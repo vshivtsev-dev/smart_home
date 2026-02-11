@@ -1,9 +1,12 @@
 :root {
   //color
-  --primary-color: #999;
+  --primary-color: #d1d1d1;
   --primary-bg-color: #222;
+  --primary-bg-color-hover: #333;
+  --border-color: rgb(0, 0, 0, 0.30);
   @media (prefers-color-scheme: light) {
-    --primary-bg-color: #999;
+    --primary-bg-color: #F5F5F5;
+    --primary-bg-color-hover: #E8E8E8;
     --primary-color: #222;
   }
   //font-size
@@ -14,6 +17,12 @@
   --gap: 10px;
   --gap-m: 20px;
   --gap-l: 40px;
+
+  //box-shadow
+  --box-shadow: var(--border-color) 0 0 7px 1px;
+  
+  //--border-radius
+  --border-radius: 10px;
 }
 
 

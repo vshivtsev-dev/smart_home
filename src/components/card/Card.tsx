@@ -1,6 +1,6 @@
 import type {ReactNode} from "react";
-import style from "./card.module.css";
+import style from "./card.module.scss";
 
 export default function ({ children }: { children: ReactNode }) {
-  return <div className={style.card}>{children}</div>;
+  return <li className={style.card}>{children}</li>;
 }

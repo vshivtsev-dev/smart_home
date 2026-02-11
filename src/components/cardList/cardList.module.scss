@@ -1,0 +1,6 @@
+.cardList {
+  list-style: none;
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}

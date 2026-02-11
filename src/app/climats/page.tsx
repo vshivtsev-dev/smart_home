@@ -1,4 +1,5 @@
 import Card from "@/components/card/Card";
+import CardList from "@/components/cardList/CardList";
 import {prisma} from "@/utils/db/prisma/prisma";
 
 export const dynamic = "force-dynamic";
@@ -9,19 +10,19 @@ export default async function () {
     include: {
       climates: {
         orderBy: { id: "desc" },
-        take: 10,
+        take: 24,
       },
     },
   });
   return (
     <div>
-      <h1>climat</h1>
-      <ul>
+      <h1>Climats</h1>
+      <CardList>
         {sensors.map((sensor) => (
-          <li key={sensor.id}>
-            <Card>
-              {sensor.name}:{sensor.target}
-              <ul>
+          <Card key={sensor.id}>
+            {sensor.name}:{sensor.target}
+            <div style={{ display: "flex", gap: "var(--gap-l)" }}>
+              <ul style={{ listStyle: "none" }}>
                 {sensor.climates.map((climate) => (
                   <li key={climate.id}>
                     {climate.createdAt.toLocaleTimeString([], {
@@ -32,10 +33,21 @@ export default async function () {
                   </li>
                 ))}
               </ul>
-            </Card>
-          </li>
+              <ul style={{ listStyle: "none" }}>
+                {sensor.climates.map((climate) => (
+                  <li key={climate.id}>
+                    {climate.createdAt.toLocaleTimeString([], {
+                      timeStyle: "short",
+                      hourCycle: "h24",
+                    })}
+                    : {climate.humidity}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
         ))}
-      </ul>
+      </CardList>
     </div>
   );
 }

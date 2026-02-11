@@ -5,10 +5,12 @@ import styles from "./nav.module.scss";
 export default function Nav() {
   return (
     <nav className={styles.nav}>
-      <ul>
+      <ul className={styles.nav__list}>
         {navList.map((item) => (
           <li key={item.link}>
-            <Link href={item.link}>{item.title}</Link>
+            <Link className={styles.nav__link} href={item.link}>
+              {item.title}
+            </Link>
           </li>
         ))}
       </ul>
