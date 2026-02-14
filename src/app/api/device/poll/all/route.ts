@@ -1,6 +1,6 @@
-import {getDevicesData} from "@/app/api/device/service";
+import {pollDevices} from "@/utils/device/pollDevices";
 
 export async function GET() {
-  await getDevicesData();
+  await pollDevices();
   return Response.json({ getDevicesData: true });
 }
