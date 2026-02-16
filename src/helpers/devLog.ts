@@ -1,3 +1,3 @@
 export function devLog(message: string) {
-  process.env.NODE_ENV !== "development" ? console.log(message) : null;
+  process.env.NODE_ENV === "development" ? console.log(message) : null;
 }

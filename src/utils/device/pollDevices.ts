@@ -1,6 +1,6 @@
 import {devLog} from "@/helpers/devLog";
 import {prisma} from "@/utils/db/prisma/prisma";
-import {getSensorsArray} from "@/utils/device/getSensors";
+import {getSensorsBody} from "@/utils/device/getSensors";
 import {postToDevice} from "@/utils/device/postToDevice";
 import {processDeviceResponse} from "@/utils/device/processDeviceResponse";
 
@@ -10,7 +10,7 @@ export async function pollDevices(): Promise<void> {
 
   await Promise.allSettled(
     devices.map(async (device) => {
-      const sensors = await getSensorsArray(device.id);
+      const sensors = await getSensorsBody(device.id);
       if (sensors.length === 0) {
         return;
       }

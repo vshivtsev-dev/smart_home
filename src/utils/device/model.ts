@@ -1,7 +1,17 @@
-import type {SensorName} from "@/generated/prisma/enums";
+import type {PinName, SensorName} from "@/generated/prisma/enums";
 
+export type PinRecord = Record<PinName, number>;
+export type SensorsBody = {
+  name: SensorName;
+  id?: number;
+  dry?: number;
+  wet?: number;
+  pins: PinRecord;
+}[];
+
+//todo functions?: {};
 export type DeviceBody = {
-  sensors?: (SensorName | { [key in Extract<SensorName, "Soil">]?: number })[];
+  sensors?: SensorsBody;
   functions?: {};
 };
 

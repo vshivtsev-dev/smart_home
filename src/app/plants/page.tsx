@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function () {
   const plants = await prisma.sensor.findMany({
-    where: { sensorType: "SOIL" },
+    where: { type: "SOIL" },
     include: {
       soils: {
         orderBy: { id: "desc" },

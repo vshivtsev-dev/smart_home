@@ -1,23 +1,44 @@
 import {getTargetNumber} from "@/helpers/getTargetNumber";
 import {prisma} from "@/utils/db/prisma/prisma";
+import {getPins} from "@/utils/device/getPins";
+import type {SensorsBody} from "@/utils/device/model";
 
 export async function getSensors(deviceId: number) {
   return prisma.sensor.findMany({
     where: {
-      devices: {
-        some: { id: deviceId },
+      device: {
+        id: deviceId,
       },
     },
+    include: { config: true },
   });
 }
 
-export async function getSensorsArray(deviceId: number) {
+export async function getSensorsBody(deviceId: number) {
   const sensors = await getSensors(deviceId);
-  return sensors.map((sensor) => {
-    if (sensor.sensorType === "SOIL" && sensor.name === "SOIL") {
-      const targetNumber = getTargetNumber(sensor.target);
-      return { [sensor.name]: targetNumber };
+  const sensorsBody: SensorsBody = [];
+  for (const sensor of sensors) {
+    if (!sensor.config) continue;
+    const pins = await getPins(sensor.config.id, "SENSOR");
+    const targetNumber = getTargetNumber(sensor.target);
+
+    switch (sensor.type) {
+      case "CLIMATE":
+        sensorsBody.push({
+          name: sensor.name,
+          pins,
+        });
+        continue;
+      case "SOIL":
+        if (!sensor.config.dry || !sensor.config.wet) continue;
+        sensorsBody.push({
+          name: sensor.name,
+          id: targetNumber,
+          dry: sensor.config.dry,
+          wet: sensor.config.wet,
+          pins,
+        });
     }
-    return sensor.name;
-  });
+  }
+  return sensorsBody;
 }

@@ -10,25 +10,25 @@ export async function processDeviceResponse(
   deviceResponse: SensorResponse[],
 ) {
   const sensors = await getSensors(device.id);
-  await Promise.all(
-    sensors.map(async (sensor) => {
-      const currentSensor = deviceResponse.find(
-        (responseSensor) => Object.keys(responseSensor)[0] === sensor.name,
-      );
-      if (!currentSensor) {
-        devLog("no currentSensor");
-        return;
-      }
-
-      if (sensor.sensorType === "CLIMATE") {
-        const sensorResponse = currentSensor[sensor.name] as ClimateResponse;
-        await insertClimate(sensor.id, sensorResponse);
-      }
-
-      if (sensor.sensorType === "SOIL") {
+  for (const sensor of sensors) {
+    const currentSensor = deviceResponse.find(
+      (responseSensor) => Object.keys(responseSensor)[0] === sensor.name,
+    );
+    if (!currentSensor) {
+      devLog(`no currentSensor ${sensor.name} ${sensor.target}`);
+      return;
+    }
+    switch (sensor.type) {
+      case "CLIMATE":
+        {
+          const sensorResponse = currentSensor[sensor.name] as ClimateResponse;
+          await insertClimate(sensor.id, sensorResponse);
+        }
+        break;
+      case "SOIL": {
         const sensorResponse = currentSensor[sensor.name] as SoilResponse;
         await compareSensorResponseWithConfig(device, sensor, sensorResponse);
       }
-    }),
-  );
+    }
+  }
 }

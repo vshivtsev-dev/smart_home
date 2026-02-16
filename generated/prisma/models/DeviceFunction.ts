@@ -28,62 +28,72 @@ export type AggregateDeviceFunction = {
 
 export type DeviceFunctionAvgAggregateOutputType = {
   id: number | null
+  deviceId: number | null
 }
 
 export type DeviceFunctionSumAggregateOutputType = {
   id: number | null
+  deviceId: number | null
 }
 
 export type DeviceFunctionMinAggregateOutputType = {
   id: number | null
   name: string | null
   target: string | null
-  functionType: $Enums.FunctionType | null
+  type: $Enums.FunctionType | null
+  deviceId: number | null
 }
 
 export type DeviceFunctionMaxAggregateOutputType = {
   id: number | null
   name: string | null
   target: string | null
-  functionType: $Enums.FunctionType | null
+  type: $Enums.FunctionType | null
+  deviceId: number | null
 }
 
 export type DeviceFunctionCountAggregateOutputType = {
   id: number
   name: number
   target: number
-  functionType: number
+  type: number
+  deviceId: number
   _all: number
 }
 
 
 export type DeviceFunctionAvgAggregateInputType = {
   id?: true
+  deviceId?: true
 }
 
 export type DeviceFunctionSumAggregateInputType = {
   id?: true
+  deviceId?: true
 }
 
 export type DeviceFunctionMinAggregateInputType = {
   id?: true
   name?: true
   target?: true
-  functionType?: true
+  type?: true
+  deviceId?: true
 }
 
 export type DeviceFunctionMaxAggregateInputType = {
   id?: true
   name?: true
   target?: true
-  functionType?: true
+  type?: true
+  deviceId?: true
 }
 
 export type DeviceFunctionCountAggregateInputType = {
   id?: true
   name?: true
   target?: true
-  functionType?: true
+  type?: true
+  deviceId?: true
   _all?: true
 }
 
@@ -177,7 +187,8 @@ export type DeviceFunctionGroupByOutputType = {
   id: number
   name: string
   target: string
-  functionType: $Enums.FunctionType
+  type: $Enums.FunctionType
+  deviceId: number
   _count: DeviceFunctionCountAggregateOutputType | null
   _avg: DeviceFunctionAvgAggregateOutputType | null
   _sum: DeviceFunctionSumAggregateOutputType | null
@@ -207,18 +218,20 @@ export type DeviceFunctionWhereInput = {
   id?: Prisma.IntFilter<"DeviceFunction"> | number
   name?: Prisma.StringFilter<"DeviceFunction"> | string
   target?: Prisma.StringFilter<"DeviceFunction"> | string
-  functionType?: Prisma.EnumFunctionTypeFilter<"DeviceFunction"> | $Enums.FunctionType
-  devices?: Prisma.DeviceListRelationFilter
-  config?: Prisma.FunctionConfigListRelationFilter
+  type?: Prisma.EnumFunctionTypeFilter<"DeviceFunction"> | $Enums.FunctionType
+  deviceId?: Prisma.IntFilter<"DeviceFunction"> | number
+  device?: Prisma.XOR<Prisma.DeviceScalarRelationFilter, Prisma.DeviceWhereInput>
+  config?: Prisma.XOR<Prisma.FunctionConfigNullableScalarRelationFilter, Prisma.FunctionConfigWhereInput> | null
 }
 
 export type DeviceFunctionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  functionType?: Prisma.SortOrder
-  devices?: Prisma.DeviceOrderByRelationAggregateInput
-  config?: Prisma.FunctionConfigOrderByRelationAggregateInput
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
+  device?: Prisma.DeviceOrderByWithRelationInput
+  config?: Prisma.FunctionConfigOrderByWithRelationInput
 }
 
 export type DeviceFunctionWhereUniqueInput = Prisma.AtLeast<{
@@ -228,16 +241,18 @@ export type DeviceFunctionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DeviceFunctionWhereInput | Prisma.DeviceFunctionWhereInput[]
   name?: Prisma.StringFilter<"DeviceFunction"> | string
   target?: Prisma.StringFilter<"DeviceFunction"> | string
-  functionType?: Prisma.EnumFunctionTypeFilter<"DeviceFunction"> | $Enums.FunctionType
-  devices?: Prisma.DeviceListRelationFilter
-  config?: Prisma.FunctionConfigListRelationFilter
+  type?: Prisma.EnumFunctionTypeFilter<"DeviceFunction"> | $Enums.FunctionType
+  deviceId?: Prisma.IntFilter<"DeviceFunction"> | number
+  device?: Prisma.XOR<Prisma.DeviceScalarRelationFilter, Prisma.DeviceWhereInput>
+  config?: Prisma.XOR<Prisma.FunctionConfigNullableScalarRelationFilter, Prisma.FunctionConfigWhereInput> | null
 }, "id">
 
 export type DeviceFunctionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  functionType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
   _count?: Prisma.DeviceFunctionCountOrderByAggregateInput
   _avg?: Prisma.DeviceFunctionAvgOrderByAggregateInput
   _max?: Prisma.DeviceFunctionMaxOrderByAggregateInput
@@ -252,61 +267,64 @@ export type DeviceFunctionScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"DeviceFunction"> | number
   name?: Prisma.StringWithAggregatesFilter<"DeviceFunction"> | string
   target?: Prisma.StringWithAggregatesFilter<"DeviceFunction"> | string
-  functionType?: Prisma.EnumFunctionTypeWithAggregatesFilter<"DeviceFunction"> | $Enums.FunctionType
+  type?: Prisma.EnumFunctionTypeWithAggregatesFilter<"DeviceFunction"> | $Enums.FunctionType
+  deviceId?: Prisma.IntWithAggregatesFilter<"DeviceFunction"> | number
 }
 
 export type DeviceFunctionCreateInput = {
   name: string
   target: string
-  functionType: $Enums.FunctionType
-  devices?: Prisma.DeviceCreateNestedManyWithoutDeviceFunctionsInput
-  config?: Prisma.FunctionConfigCreateNestedManyWithoutDeviceFunctionInput
+  type: $Enums.FunctionType
+  device: Prisma.DeviceCreateNestedOneWithoutFunctionsInput
+  config?: Prisma.FunctionConfigCreateNestedOneWithoutFunctionInput
 }
 
 export type DeviceFunctionUncheckedCreateInput = {
   id?: number
   name: string
   target: string
-  functionType: $Enums.FunctionType
-  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutDeviceFunctionsInput
-  config?: Prisma.FunctionConfigUncheckedCreateNestedManyWithoutDeviceFunctionInput
+  type: $Enums.FunctionType
+  deviceId: number
+  config?: Prisma.FunctionConfigUncheckedCreateNestedOneWithoutFunctionInput
 }
 
 export type DeviceFunctionUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
-  devices?: Prisma.DeviceUpdateManyWithoutDeviceFunctionsNestedInput
-  config?: Prisma.FunctionConfigUpdateManyWithoutDeviceFunctionNestedInput
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  device?: Prisma.DeviceUpdateOneRequiredWithoutFunctionsNestedInput
+  config?: Prisma.FunctionConfigUpdateOneWithoutFunctionNestedInput
 }
 
 export type DeviceFunctionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
-  devices?: Prisma.DeviceUncheckedUpdateManyWithoutDeviceFunctionsNestedInput
-  config?: Prisma.FunctionConfigUncheckedUpdateManyWithoutDeviceFunctionNestedInput
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
+  config?: Prisma.FunctionConfigUncheckedUpdateOneWithoutFunctionNestedInput
 }
 
 export type DeviceFunctionCreateManyInput = {
   id?: number
   name: string
   target: string
-  functionType: $Enums.FunctionType
+  type: $Enums.FunctionType
+  deviceId: number
 }
 
 export type DeviceFunctionUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
 }
 
 export type DeviceFunctionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DeviceFunctionListRelationFilter = {
@@ -323,66 +341,80 @@ export type DeviceFunctionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  functionType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type DeviceFunctionAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type DeviceFunctionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  functionType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type DeviceFunctionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  functionType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type DeviceFunctionSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
-export type DeviceFunctionCreateNestedManyWithoutDevicesInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput> | Prisma.DeviceFunctionCreateWithoutDevicesInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput | Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput[]
+export type DeviceFunctionScalarRelationFilter = {
+  is?: Prisma.DeviceFunctionWhereInput
+  isNot?: Prisma.DeviceFunctionWhereInput
+}
+
+export type DeviceFunctionCreateNestedManyWithoutDeviceInput = {
+  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput> | Prisma.DeviceFunctionCreateWithoutDeviceInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput | Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput[]
+  createMany?: Prisma.DeviceFunctionCreateManyDeviceInputEnvelope
   connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
 }
 
-export type DeviceFunctionUncheckedCreateNestedManyWithoutDevicesInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput> | Prisma.DeviceFunctionCreateWithoutDevicesInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput | Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput[]
+export type DeviceFunctionUncheckedCreateNestedManyWithoutDeviceInput = {
+  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput> | Prisma.DeviceFunctionCreateWithoutDeviceInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput | Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput[]
+  createMany?: Prisma.DeviceFunctionCreateManyDeviceInputEnvelope
   connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
 }
 
-export type DeviceFunctionUpdateManyWithoutDevicesNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput> | Prisma.DeviceFunctionCreateWithoutDevicesInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput | Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput[]
-  upsert?: Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDevicesInput | Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDevicesInput[]
+export type DeviceFunctionUpdateManyWithoutDeviceNestedInput = {
+  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput> | Prisma.DeviceFunctionCreateWithoutDeviceInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput | Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput[]
+  upsert?: Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDeviceInput | Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDeviceInput[]
+  createMany?: Prisma.DeviceFunctionCreateManyDeviceInputEnvelope
   set?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
   disconnect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
   delete?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
   connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  update?: Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDevicesInput | Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDevicesInput[]
-  updateMany?: Prisma.DeviceFunctionUpdateManyWithWhereWithoutDevicesInput | Prisma.DeviceFunctionUpdateManyWithWhereWithoutDevicesInput[]
+  update?: Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDeviceInput | Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDeviceInput[]
+  updateMany?: Prisma.DeviceFunctionUpdateManyWithWhereWithoutDeviceInput | Prisma.DeviceFunctionUpdateManyWithWhereWithoutDeviceInput[]
   deleteMany?: Prisma.DeviceFunctionScalarWhereInput | Prisma.DeviceFunctionScalarWhereInput[]
 }
 
-export type DeviceFunctionUncheckedUpdateManyWithoutDevicesNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput> | Prisma.DeviceFunctionCreateWithoutDevicesInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput | Prisma.DeviceFunctionCreateOrConnectWithoutDevicesInput[]
-  upsert?: Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDevicesInput | Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDevicesInput[]
+export type DeviceFunctionUncheckedUpdateManyWithoutDeviceNestedInput = {
+  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput> | Prisma.DeviceFunctionCreateWithoutDeviceInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput | Prisma.DeviceFunctionCreateOrConnectWithoutDeviceInput[]
+  upsert?: Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDeviceInput | Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutDeviceInput[]
+  createMany?: Prisma.DeviceFunctionCreateManyDeviceInputEnvelope
   set?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
   disconnect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
   delete?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
   connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  update?: Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDevicesInput | Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDevicesInput[]
-  updateMany?: Prisma.DeviceFunctionUpdateManyWithWhereWithoutDevicesInput | Prisma.DeviceFunctionUpdateManyWithWhereWithoutDevicesInput[]
+  update?: Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDeviceInput | Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutDeviceInput[]
+  updateMany?: Prisma.DeviceFunctionUpdateManyWithWhereWithoutDeviceInput | Prisma.DeviceFunctionUpdateManyWithWhereWithoutDeviceInput[]
   deleteMany?: Prisma.DeviceFunctionScalarWhereInput | Prisma.DeviceFunctionScalarWhereInput[]
 }
 
@@ -390,78 +422,59 @@ export type EnumFunctionTypeFieldUpdateOperationsInput = {
   set?: $Enums.FunctionType
 }
 
-export type DeviceFunctionCreateNestedManyWithoutConfigInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput> | Prisma.DeviceFunctionCreateWithoutConfigInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput | Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput[]
-  connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
+export type DeviceFunctionCreateNestedOneWithoutConfigInput = {
+  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput>
+  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput
+  connect?: Prisma.DeviceFunctionWhereUniqueInput
 }
 
-export type DeviceFunctionUncheckedCreateNestedManyWithoutConfigInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput> | Prisma.DeviceFunctionCreateWithoutConfigInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput | Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput[]
-  connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
+export type DeviceFunctionUpdateOneRequiredWithoutConfigNestedInput = {
+  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput>
+  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput
+  upsert?: Prisma.DeviceFunctionUpsertWithoutConfigInput
+  connect?: Prisma.DeviceFunctionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeviceFunctionUpdateToOneWithWhereWithoutConfigInput, Prisma.DeviceFunctionUpdateWithoutConfigInput>, Prisma.DeviceFunctionUncheckedUpdateWithoutConfigInput>
 }
 
-export type DeviceFunctionUpdateManyWithoutConfigNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput> | Prisma.DeviceFunctionCreateWithoutConfigInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput | Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput[]
-  upsert?: Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutConfigInput | Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutConfigInput[]
-  set?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  disconnect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  delete?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  update?: Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutConfigInput | Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutConfigInput[]
-  updateMany?: Prisma.DeviceFunctionUpdateManyWithWhereWithoutConfigInput | Prisma.DeviceFunctionUpdateManyWithWhereWithoutConfigInput[]
-  deleteMany?: Prisma.DeviceFunctionScalarWhereInput | Prisma.DeviceFunctionScalarWhereInput[]
-}
-
-export type DeviceFunctionUncheckedUpdateManyWithoutConfigNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput> | Prisma.DeviceFunctionCreateWithoutConfigInput[] | Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput[]
-  connectOrCreate?: Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput | Prisma.DeviceFunctionCreateOrConnectWithoutConfigInput[]
-  upsert?: Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutConfigInput | Prisma.DeviceFunctionUpsertWithWhereUniqueWithoutConfigInput[]
-  set?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  disconnect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  delete?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  connect?: Prisma.DeviceFunctionWhereUniqueInput | Prisma.DeviceFunctionWhereUniqueInput[]
-  update?: Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutConfigInput | Prisma.DeviceFunctionUpdateWithWhereUniqueWithoutConfigInput[]
-  updateMany?: Prisma.DeviceFunctionUpdateManyWithWhereWithoutConfigInput | Prisma.DeviceFunctionUpdateManyWithWhereWithoutConfigInput[]
-  deleteMany?: Prisma.DeviceFunctionScalarWhereInput | Prisma.DeviceFunctionScalarWhereInput[]
-}
-
-export type DeviceFunctionCreateWithoutDevicesInput = {
+export type DeviceFunctionCreateWithoutDeviceInput = {
   name: string
   target: string
-  functionType: $Enums.FunctionType
-  config?: Prisma.FunctionConfigCreateNestedManyWithoutDeviceFunctionInput
+  type: $Enums.FunctionType
+  config?: Prisma.FunctionConfigCreateNestedOneWithoutFunctionInput
 }
 
-export type DeviceFunctionUncheckedCreateWithoutDevicesInput = {
+export type DeviceFunctionUncheckedCreateWithoutDeviceInput = {
   id?: number
   name: string
   target: string
-  functionType: $Enums.FunctionType
-  config?: Prisma.FunctionConfigUncheckedCreateNestedManyWithoutDeviceFunctionInput
+  type: $Enums.FunctionType
+  config?: Prisma.FunctionConfigUncheckedCreateNestedOneWithoutFunctionInput
 }
 
-export type DeviceFunctionCreateOrConnectWithoutDevicesInput = {
+export type DeviceFunctionCreateOrConnectWithoutDeviceInput = {
   where: Prisma.DeviceFunctionWhereUniqueInput
-  create: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput>
+  create: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput>
 }
 
-export type DeviceFunctionUpsertWithWhereUniqueWithoutDevicesInput = {
+export type DeviceFunctionCreateManyDeviceInputEnvelope = {
+  data: Prisma.DeviceFunctionCreateManyDeviceInput | Prisma.DeviceFunctionCreateManyDeviceInput[]
+  skipDuplicates?: boolean
+}
+
+export type DeviceFunctionUpsertWithWhereUniqueWithoutDeviceInput = {
   where: Prisma.DeviceFunctionWhereUniqueInput
-  update: Prisma.XOR<Prisma.DeviceFunctionUpdateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedUpdateWithoutDevicesInput>
-  create: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedCreateWithoutDevicesInput>
+  update: Prisma.XOR<Prisma.DeviceFunctionUpdateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedUpdateWithoutDeviceInput>
+  create: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedCreateWithoutDeviceInput>
 }
 
-export type DeviceFunctionUpdateWithWhereUniqueWithoutDevicesInput = {
+export type DeviceFunctionUpdateWithWhereUniqueWithoutDeviceInput = {
   where: Prisma.DeviceFunctionWhereUniqueInput
-  data: Prisma.XOR<Prisma.DeviceFunctionUpdateWithoutDevicesInput, Prisma.DeviceFunctionUncheckedUpdateWithoutDevicesInput>
+  data: Prisma.XOR<Prisma.DeviceFunctionUpdateWithoutDeviceInput, Prisma.DeviceFunctionUncheckedUpdateWithoutDeviceInput>
 }
 
-export type DeviceFunctionUpdateManyWithWhereWithoutDevicesInput = {
+export type DeviceFunctionUpdateManyWithWhereWithoutDeviceInput = {
   where: Prisma.DeviceFunctionScalarWhereInput
-  data: Prisma.XOR<Prisma.DeviceFunctionUpdateManyMutationInput, Prisma.DeviceFunctionUncheckedUpdateManyWithoutDevicesInput>
+  data: Prisma.XOR<Prisma.DeviceFunctionUpdateManyMutationInput, Prisma.DeviceFunctionUncheckedUpdateManyWithoutDeviceInput>
 }
 
 export type DeviceFunctionScalarWhereInput = {
@@ -471,22 +484,23 @@ export type DeviceFunctionScalarWhereInput = {
   id?: Prisma.IntFilter<"DeviceFunction"> | number
   name?: Prisma.StringFilter<"DeviceFunction"> | string
   target?: Prisma.StringFilter<"DeviceFunction"> | string
-  functionType?: Prisma.EnumFunctionTypeFilter<"DeviceFunction"> | $Enums.FunctionType
+  type?: Prisma.EnumFunctionTypeFilter<"DeviceFunction"> | $Enums.FunctionType
+  deviceId?: Prisma.IntFilter<"DeviceFunction"> | number
 }
 
 export type DeviceFunctionCreateWithoutConfigInput = {
   name: string
   target: string
-  functionType: $Enums.FunctionType
-  devices?: Prisma.DeviceCreateNestedManyWithoutDeviceFunctionsInput
+  type: $Enums.FunctionType
+  device: Prisma.DeviceCreateNestedOneWithoutFunctionsInput
 }
 
 export type DeviceFunctionUncheckedCreateWithoutConfigInput = {
   id?: number
   name: string
   target: string
-  functionType: $Enums.FunctionType
-  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutDeviceFunctionsInput
+  type: $Enums.FunctionType
+  deviceId: number
 }
 
 export type DeviceFunctionCreateOrConnectWithoutConfigInput = {
@@ -494,157 +508,123 @@ export type DeviceFunctionCreateOrConnectWithoutConfigInput = {
   create: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput>
 }
 
-export type DeviceFunctionUpsertWithWhereUniqueWithoutConfigInput = {
-  where: Prisma.DeviceFunctionWhereUniqueInput
+export type DeviceFunctionUpsertWithoutConfigInput = {
   update: Prisma.XOR<Prisma.DeviceFunctionUpdateWithoutConfigInput, Prisma.DeviceFunctionUncheckedUpdateWithoutConfigInput>
   create: Prisma.XOR<Prisma.DeviceFunctionCreateWithoutConfigInput, Prisma.DeviceFunctionUncheckedCreateWithoutConfigInput>
+  where?: Prisma.DeviceFunctionWhereInput
 }
 
-export type DeviceFunctionUpdateWithWhereUniqueWithoutConfigInput = {
-  where: Prisma.DeviceFunctionWhereUniqueInput
+export type DeviceFunctionUpdateToOneWithWhereWithoutConfigInput = {
+  where?: Prisma.DeviceFunctionWhereInput
   data: Prisma.XOR<Prisma.DeviceFunctionUpdateWithoutConfigInput, Prisma.DeviceFunctionUncheckedUpdateWithoutConfigInput>
-}
-
-export type DeviceFunctionUpdateManyWithWhereWithoutConfigInput = {
-  where: Prisma.DeviceFunctionScalarWhereInput
-  data: Prisma.XOR<Prisma.DeviceFunctionUpdateManyMutationInput, Prisma.DeviceFunctionUncheckedUpdateManyWithoutConfigInput>
-}
-
-export type DeviceFunctionUpdateWithoutDevicesInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
-  config?: Prisma.FunctionConfigUpdateManyWithoutDeviceFunctionNestedInput
-}
-
-export type DeviceFunctionUncheckedUpdateWithoutDevicesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
-  config?: Prisma.FunctionConfigUncheckedUpdateManyWithoutDeviceFunctionNestedInput
-}
-
-export type DeviceFunctionUncheckedUpdateManyWithoutDevicesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
 }
 
 export type DeviceFunctionUpdateWithoutConfigInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
-  devices?: Prisma.DeviceUpdateManyWithoutDeviceFunctionsNestedInput
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  device?: Prisma.DeviceUpdateOneRequiredWithoutFunctionsNestedInput
 }
 
 export type DeviceFunctionUncheckedUpdateWithoutConfigInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
-  devices?: Prisma.DeviceUncheckedUpdateManyWithoutDeviceFunctionsNestedInput
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type DeviceFunctionUncheckedUpdateManyWithoutConfigInput = {
+export type DeviceFunctionCreateManyDeviceInput = {
+  id?: number
+  name: string
+  target: string
+  type: $Enums.FunctionType
+}
+
+export type DeviceFunctionUpdateWithoutDeviceInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  target?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  config?: Prisma.FunctionConfigUpdateOneWithoutFunctionNestedInput
+}
+
+export type DeviceFunctionUncheckedUpdateWithoutDeviceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  functionType?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
+  config?: Prisma.FunctionConfigUncheckedUpdateOneWithoutFunctionNestedInput
 }
 
-
-/**
- * Count Type DeviceFunctionCountOutputType
- */
-
-export type DeviceFunctionCountOutputType = {
-  devices: number
-  config: number
+export type DeviceFunctionUncheckedUpdateManyWithoutDeviceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  target?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumFunctionTypeFieldUpdateOperationsInput | $Enums.FunctionType
 }
 
-export type DeviceFunctionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  devices?: boolean | DeviceFunctionCountOutputTypeCountDevicesArgs
-  config?: boolean | DeviceFunctionCountOutputTypeCountConfigArgs
-}
-
-/**
- * DeviceFunctionCountOutputType without action
- */
-export type DeviceFunctionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the DeviceFunctionCountOutputType
-   */
-  select?: Prisma.DeviceFunctionCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * DeviceFunctionCountOutputType without action
- */
-export type DeviceFunctionCountOutputTypeCountDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeviceWhereInput
-}
-
-/**
- * DeviceFunctionCountOutputType without action
- */
-export type DeviceFunctionCountOutputTypeCountConfigArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FunctionConfigWhereInput
-}
 
 
 export type DeviceFunctionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   target?: boolean
-  functionType?: boolean
-  devices?: boolean | Prisma.DeviceFunction$devicesArgs<ExtArgs>
+  type?: boolean
+  deviceId?: boolean
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
   config?: boolean | Prisma.DeviceFunction$configArgs<ExtArgs>
-  _count?: boolean | Prisma.DeviceFunctionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deviceFunction"]>
 
 export type DeviceFunctionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   target?: boolean
-  functionType?: boolean
+  type?: boolean
+  deviceId?: boolean
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deviceFunction"]>
 
 export type DeviceFunctionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   target?: boolean
-  functionType?: boolean
+  type?: boolean
+  deviceId?: boolean
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deviceFunction"]>
 
 export type DeviceFunctionSelectScalar = {
   id?: boolean
   name?: boolean
   target?: boolean
-  functionType?: boolean
+  type?: boolean
+  deviceId?: boolean
 }
 
-export type DeviceFunctionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "target" | "functionType", ExtArgs["result"]["deviceFunction"]>
+export type DeviceFunctionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "target" | "type" | "deviceId", ExtArgs["result"]["deviceFunction"]>
 export type DeviceFunctionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  devices?: boolean | Prisma.DeviceFunction$devicesArgs<ExtArgs>
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
   config?: boolean | Prisma.DeviceFunction$configArgs<ExtArgs>
-  _count?: boolean | Prisma.DeviceFunctionCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type DeviceFunctionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type DeviceFunctionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type DeviceFunctionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
+}
+export type DeviceFunctionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
+}
 
 export type $DeviceFunctionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DeviceFunction"
   objects: {
-    devices: Prisma.$DevicePayload<ExtArgs>[]
-    config: Prisma.$FunctionConfigPayload<ExtArgs>[]
+    device: Prisma.$DevicePayload<ExtArgs>
+    config: Prisma.$FunctionConfigPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: string
     target: string
-    functionType: $Enums.FunctionType
+    type: $Enums.FunctionType
+    deviceId: number
   }, ExtArgs["result"]["deviceFunction"]>
   composites: {}
 }
@@ -1039,8 +1019,8 @@ readonly fields: DeviceFunctionFieldRefs;
  */
 export interface Prisma__DeviceFunctionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  devices<T extends Prisma.DeviceFunction$devicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeviceFunction$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  config<T extends Prisma.DeviceFunction$configArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeviceFunction$configArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FunctionConfigPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  device<T extends Prisma.DeviceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeviceDefaultArgs<ExtArgs>>): Prisma.Prisma__DeviceClient<runtime.Types.Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  config<T extends Prisma.DeviceFunction$configArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeviceFunction$configArgs<ExtArgs>>): Prisma.Prisma__FunctionConfigClient<runtime.Types.Result.GetResult<Prisma.$FunctionConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1073,7 +1053,8 @@ export interface DeviceFunctionFieldRefs {
   readonly id: Prisma.FieldRef<"DeviceFunction", 'Int'>
   readonly name: Prisma.FieldRef<"DeviceFunction", 'String'>
   readonly target: Prisma.FieldRef<"DeviceFunction", 'String'>
-  readonly functionType: Prisma.FieldRef<"DeviceFunction", 'FunctionType'>
+  readonly type: Prisma.FieldRef<"DeviceFunction", 'FunctionType'>
+  readonly deviceId: Prisma.FieldRef<"DeviceFunction", 'Int'>
 }
     
 
@@ -1323,6 +1304,10 @@ export type DeviceFunctionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    */
   data: Prisma.DeviceFunctionCreateManyInput | Prisma.DeviceFunctionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeviceFunctionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1393,6 +1378,10 @@ export type DeviceFunctionUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * Limit how many DeviceFunctions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeviceFunctionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1462,30 +1451,6 @@ export type DeviceFunctionDeleteManyArgs<ExtArgs extends runtime.Types.Extension
 }
 
 /**
- * DeviceFunction.devices
- */
-export type DeviceFunction$devicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Device
-   */
-  select?: Prisma.DeviceSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Device
-   */
-  omit?: Prisma.DeviceOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DeviceInclude<ExtArgs> | null
-  where?: Prisma.DeviceWhereInput
-  orderBy?: Prisma.DeviceOrderByWithRelationInput | Prisma.DeviceOrderByWithRelationInput[]
-  cursor?: Prisma.DeviceWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DeviceScalarFieldEnum | Prisma.DeviceScalarFieldEnum[]
-}
-
-/**
  * DeviceFunction.config
  */
 export type DeviceFunction$configArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1502,11 +1467,6 @@ export type DeviceFunction$configArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.FunctionConfigInclude<ExtArgs> | null
   where?: Prisma.FunctionConfigWhereInput
-  orderBy?: Prisma.FunctionConfigOrderByWithRelationInput | Prisma.FunctionConfigOrderByWithRelationInput[]
-  cursor?: Prisma.FunctionConfigWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FunctionConfigScalarFieldEnum | Prisma.FunctionConfigScalarFieldEnum[]
 }
 
 /**

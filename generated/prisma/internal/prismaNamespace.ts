@@ -392,6 +392,8 @@ export const ModelName = {
   Soil: 'Soil',
   Device: 'Device',
   Sensor: 'Sensor',
+  SensorConfig: 'SensorConfig',
+  DevicePin: 'DevicePin',
   DeviceFunction: 'DeviceFunction',
   FunctionConfig: 'FunctionConfig'
 } as const
@@ -409,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "climate" | "soil" | "device" | "sensor" | "deviceFunction" | "functionConfig"
+    modelProps: "user" | "session" | "account" | "verification" | "climate" | "soil" | "device" | "sensor" | "sensorConfig" | "devicePin" | "deviceFunction" | "functionConfig"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1005,6 +1007,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SensorConfig: {
+      payload: Prisma.$SensorConfigPayload<ExtArgs>
+      fields: Prisma.SensorConfigFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SensorConfigFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SensorConfigFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>
+        }
+        findFirst: {
+          args: Prisma.SensorConfigFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SensorConfigFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>
+        }
+        findMany: {
+          args: Prisma.SensorConfigFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>[]
+        }
+        create: {
+          args: Prisma.SensorConfigCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>
+        }
+        createMany: {
+          args: Prisma.SensorConfigCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SensorConfigCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>[]
+        }
+        delete: {
+          args: Prisma.SensorConfigDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>
+        }
+        update: {
+          args: Prisma.SensorConfigUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>
+        }
+        deleteMany: {
+          args: Prisma.SensorConfigDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SensorConfigUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SensorConfigUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>[]
+        }
+        upsert: {
+          args: Prisma.SensorConfigUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SensorConfigPayload>
+        }
+        aggregate: {
+          args: Prisma.SensorConfigAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSensorConfig>
+        }
+        groupBy: {
+          args: Prisma.SensorConfigGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SensorConfigGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SensorConfigCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SensorConfigCountAggregateOutputType> | number
+        }
+      }
+    }
+    DevicePin: {
+      payload: Prisma.$DevicePinPayload<ExtArgs>
+      fields: Prisma.DevicePinFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DevicePinFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DevicePinFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>
+        }
+        findFirst: {
+          args: Prisma.DevicePinFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DevicePinFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>
+        }
+        findMany: {
+          args: Prisma.DevicePinFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>[]
+        }
+        create: {
+          args: Prisma.DevicePinCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>
+        }
+        createMany: {
+          args: Prisma.DevicePinCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DevicePinCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>[]
+        }
+        delete: {
+          args: Prisma.DevicePinDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>
+        }
+        update: {
+          args: Prisma.DevicePinUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>
+        }
+        deleteMany: {
+          args: Prisma.DevicePinDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DevicePinUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DevicePinUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>[]
+        }
+        upsert: {
+          args: Prisma.DevicePinUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevicePinPayload>
+        }
+        aggregate: {
+          args: Prisma.DevicePinAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDevicePin>
+        }
+        groupBy: {
+          args: Prisma.DevicePinGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DevicePinGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DevicePinCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DevicePinCountAggregateOutputType> | number
+        }
+      }
+    }
     DeviceFunction: {
       payload: Prisma.$DeviceFunctionPayload<ExtArgs>
       fields: Prisma.DeviceFunctionFieldRefs
@@ -1291,17 +1441,40 @@ export const SensorScalarFieldEnum = {
   id: 'id',
   name: 'name',
   target: 'target',
-  sensorType: 'sensorType'
+  type: 'type',
+  deviceId: 'deviceId'
 } as const
 
 export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
+
+
+export const SensorConfigScalarFieldEnum = {
+  id: 'id',
+  sensorId: 'sensorId',
+  dry: 'dry',
+  wet: 'wet'
+} as const
+
+export type SensorConfigScalarFieldEnum = (typeof SensorConfigScalarFieldEnum)[keyof typeof SensorConfigScalarFieldEnum]
+
+
+export const DevicePinScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  number: 'number',
+  sensorConfigId: 'sensorConfigId',
+  functionConfigId: 'functionConfigId'
+} as const
+
+export type DevicePinScalarFieldEnum = (typeof DevicePinScalarFieldEnum)[keyof typeof DevicePinScalarFieldEnum]
 
 
 export const DeviceFunctionScalarFieldEnum = {
   id: 'id',
   name: 'name',
   target: 'target',
-  functionType: 'functionType'
+  type: 'type',
+  deviceId: 'deviceId'
 } as const
 
 export type DeviceFunctionScalarFieldEnum = (typeof DeviceFunctionScalarFieldEnum)[keyof typeof DeviceFunctionScalarFieldEnum]
@@ -1309,6 +1482,7 @@ export type DeviceFunctionScalarFieldEnum = (typeof DeviceFunctionScalarFieldEnu
 
 export const FunctionConfigScalarFieldEnum = {
   id: 'id',
+  functionId: 'functionId',
   duration: 'duration',
   minMoisture: 'minMoisture'
 } as const
@@ -1438,6 +1612,20 @@ export type ListEnumSensorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'PinName'
+ */
+export type EnumPinNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PinName'>
+    
+
+
+/**
+ * Reference to a field of type 'PinName[]'
+ */
+export type ListEnumPinNameFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PinName[]'>
+    
+
+
+/**
  * Reference to a field of type 'FunctionType'
  */
 export type EnumFunctionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FunctionType'>
@@ -1553,6 +1741,8 @@ export type GlobalOmitConfig = {
   soil?: Prisma.SoilOmit
   device?: Prisma.DeviceOmit
   sensor?: Prisma.SensorOmit
+  sensorConfig?: Prisma.SensorConfigOmit
+  devicePin?: Prisma.DevicePinOmit
   deviceFunction?: Prisma.DeviceFunctionOmit
   functionConfig?: Prisma.FunctionConfigOmit
 }

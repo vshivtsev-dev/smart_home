@@ -31,3 +31,13 @@ export const FunctionType = {
 } as const
 
 export type FunctionType = (typeof FunctionType)[keyof typeof FunctionType]
+
+
+export const PinName = {
+  ANALOG: 'ANALOG',
+  DIGITAL: 'DIGITAL',
+  SCL: 'SCL',
+  SDA: 'SDA'
+} as const
+
+export type PinName = (typeof PinName)[keyof typeof PinName]

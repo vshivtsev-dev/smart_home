@@ -58,6 +58,16 @@ export type Device = Prisma.DeviceModel
  */
 export type Sensor = Prisma.SensorModel
 /**
+ * Model SensorConfig
+ * 
+ */
+export type SensorConfig = Prisma.SensorConfigModel
+/**
+ * Model DevicePin
+ * 
+ */
+export type DevicePin = Prisma.DevicePinModel
+/**
  * Model DeviceFunction
  * 
  */

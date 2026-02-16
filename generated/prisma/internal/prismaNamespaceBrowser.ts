@@ -59,6 +59,8 @@ export const ModelName = {
   Soil: 'Soil',
   Device: 'Device',
   Sensor: 'Sensor',
+  SensorConfig: 'SensorConfig',
+  DevicePin: 'DevicePin',
   DeviceFunction: 'DeviceFunction',
   FunctionConfig: 'FunctionConfig'
 } as const
@@ -178,17 +180,40 @@ export const SensorScalarFieldEnum = {
   id: 'id',
   name: 'name',
   target: 'target',
-  sensorType: 'sensorType'
+  type: 'type',
+  deviceId: 'deviceId'
 } as const
 
 export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
+
+
+export const SensorConfigScalarFieldEnum = {
+  id: 'id',
+  sensorId: 'sensorId',
+  dry: 'dry',
+  wet: 'wet'
+} as const
+
+export type SensorConfigScalarFieldEnum = (typeof SensorConfigScalarFieldEnum)[keyof typeof SensorConfigScalarFieldEnum]
+
+
+export const DevicePinScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  number: 'number',
+  sensorConfigId: 'sensorConfigId',
+  functionConfigId: 'functionConfigId'
+} as const
+
+export type DevicePinScalarFieldEnum = (typeof DevicePinScalarFieldEnum)[keyof typeof DevicePinScalarFieldEnum]
 
 
 export const DeviceFunctionScalarFieldEnum = {
   id: 'id',
   name: 'name',
   target: 'target',
-  functionType: 'functionType'
+  type: 'type',
+  deviceId: 'deviceId'
 } as const
 
 export type DeviceFunctionScalarFieldEnum = (typeof DeviceFunctionScalarFieldEnum)[keyof typeof DeviceFunctionScalarFieldEnum]
@@ -196,6 +221,7 @@ export type DeviceFunctionScalarFieldEnum = (typeof DeviceFunctionScalarFieldEnu
 
 export const FunctionConfigScalarFieldEnum = {
   id: 'id',
+  functionId: 'functionId',
   duration: 'duration',
   minMoisture: 'minMoisture'
 } as const

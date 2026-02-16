@@ -201,7 +201,7 @@ export type DeviceWhereInput = {
   name?: Prisma.StringFilter<"Device"> | string
   ip?: Prisma.StringFilter<"Device"> | string
   sensors?: Prisma.SensorListRelationFilter
-  deviceFunctions?: Prisma.DeviceFunctionListRelationFilter
+  functions?: Prisma.DeviceFunctionListRelationFilter
 }
 
 export type DeviceOrderByWithRelationInput = {
@@ -209,7 +209,7 @@ export type DeviceOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   ip?: Prisma.SortOrder
   sensors?: Prisma.SensorOrderByRelationAggregateInput
-  deviceFunctions?: Prisma.DeviceFunctionOrderByRelationAggregateInput
+  functions?: Prisma.DeviceFunctionOrderByRelationAggregateInput
 }
 
 export type DeviceWhereUniqueInput = Prisma.AtLeast<{
@@ -220,7 +220,7 @@ export type DeviceWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Device"> | string
   ip?: Prisma.StringFilter<"Device"> | string
   sensors?: Prisma.SensorListRelationFilter
-  deviceFunctions?: Prisma.DeviceFunctionListRelationFilter
+  functions?: Prisma.DeviceFunctionListRelationFilter
 }, "id">
 
 export type DeviceOrderByWithAggregationInput = {
@@ -246,31 +246,31 @@ export type DeviceScalarWhereWithAggregatesInput = {
 export type DeviceCreateInput = {
   name: string
   ip: string
-  sensors?: Prisma.SensorCreateNestedManyWithoutDevicesInput
-  deviceFunctions?: Prisma.DeviceFunctionCreateNestedManyWithoutDevicesInput
+  sensors?: Prisma.SensorCreateNestedManyWithoutDeviceInput
+  functions?: Prisma.DeviceFunctionCreateNestedManyWithoutDeviceInput
 }
 
 export type DeviceUncheckedCreateInput = {
   id?: number
   name: string
   ip: string
-  sensors?: Prisma.SensorUncheckedCreateNestedManyWithoutDevicesInput
-  deviceFunctions?: Prisma.DeviceFunctionUncheckedCreateNestedManyWithoutDevicesInput
+  sensors?: Prisma.SensorUncheckedCreateNestedManyWithoutDeviceInput
+  functions?: Prisma.DeviceFunctionUncheckedCreateNestedManyWithoutDeviceInput
 }
 
 export type DeviceUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   ip?: Prisma.StringFieldUpdateOperationsInput | string
-  sensors?: Prisma.SensorUpdateManyWithoutDevicesNestedInput
-  deviceFunctions?: Prisma.DeviceFunctionUpdateManyWithoutDevicesNestedInput
+  sensors?: Prisma.SensorUpdateManyWithoutDeviceNestedInput
+  functions?: Prisma.DeviceFunctionUpdateManyWithoutDeviceNestedInput
 }
 
 export type DeviceUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   ip?: Prisma.StringFieldUpdateOperationsInput | string
-  sensors?: Prisma.SensorUncheckedUpdateManyWithoutDevicesNestedInput
-  deviceFunctions?: Prisma.DeviceFunctionUncheckedUpdateManyWithoutDevicesNestedInput
+  sensors?: Prisma.SensorUncheckedUpdateManyWithoutDeviceNestedInput
+  functions?: Prisma.DeviceFunctionUncheckedUpdateManyWithoutDeviceNestedInput
 }
 
 export type DeviceCreateManyInput = {
@@ -316,103 +316,50 @@ export type DeviceSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type DeviceListRelationFilter = {
-  every?: Prisma.DeviceWhereInput
-  some?: Prisma.DeviceWhereInput
-  none?: Prisma.DeviceWhereInput
+export type DeviceScalarRelationFilter = {
+  is?: Prisma.DeviceWhereInput
+  isNot?: Prisma.DeviceWhereInput
 }
 
-export type DeviceOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type DeviceCreateNestedOneWithoutSensorsInput = {
+  create?: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput>
+  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutSensorsInput
+  connect?: Prisma.DeviceWhereUniqueInput
 }
 
-export type DeviceCreateNestedManyWithoutSensorsInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput> | Prisma.DeviceCreateWithoutSensorsInput[] | Prisma.DeviceUncheckedCreateWithoutSensorsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutSensorsInput | Prisma.DeviceCreateOrConnectWithoutSensorsInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
+export type DeviceUpdateOneRequiredWithoutSensorsNestedInput = {
+  create?: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput>
+  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutSensorsInput
+  upsert?: Prisma.DeviceUpsertWithoutSensorsInput
+  connect?: Prisma.DeviceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeviceUpdateToOneWithWhereWithoutSensorsInput, Prisma.DeviceUpdateWithoutSensorsInput>, Prisma.DeviceUncheckedUpdateWithoutSensorsInput>
 }
 
-export type DeviceUncheckedCreateNestedManyWithoutSensorsInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput> | Prisma.DeviceCreateWithoutSensorsInput[] | Prisma.DeviceUncheckedCreateWithoutSensorsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutSensorsInput | Prisma.DeviceCreateOrConnectWithoutSensorsInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
+export type DeviceCreateNestedOneWithoutFunctionsInput = {
+  create?: Prisma.XOR<Prisma.DeviceCreateWithoutFunctionsInput, Prisma.DeviceUncheckedCreateWithoutFunctionsInput>
+  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutFunctionsInput
+  connect?: Prisma.DeviceWhereUniqueInput
 }
 
-export type DeviceUpdateManyWithoutSensorsNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput> | Prisma.DeviceCreateWithoutSensorsInput[] | Prisma.DeviceUncheckedCreateWithoutSensorsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutSensorsInput | Prisma.DeviceCreateOrConnectWithoutSensorsInput[]
-  upsert?: Prisma.DeviceUpsertWithWhereUniqueWithoutSensorsInput | Prisma.DeviceUpsertWithWhereUniqueWithoutSensorsInput[]
-  set?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  disconnect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  delete?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  update?: Prisma.DeviceUpdateWithWhereUniqueWithoutSensorsInput | Prisma.DeviceUpdateWithWhereUniqueWithoutSensorsInput[]
-  updateMany?: Prisma.DeviceUpdateManyWithWhereWithoutSensorsInput | Prisma.DeviceUpdateManyWithWhereWithoutSensorsInput[]
-  deleteMany?: Prisma.DeviceScalarWhereInput | Prisma.DeviceScalarWhereInput[]
-}
-
-export type DeviceUncheckedUpdateManyWithoutSensorsNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput> | Prisma.DeviceCreateWithoutSensorsInput[] | Prisma.DeviceUncheckedCreateWithoutSensorsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutSensorsInput | Prisma.DeviceCreateOrConnectWithoutSensorsInput[]
-  upsert?: Prisma.DeviceUpsertWithWhereUniqueWithoutSensorsInput | Prisma.DeviceUpsertWithWhereUniqueWithoutSensorsInput[]
-  set?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  disconnect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  delete?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  update?: Prisma.DeviceUpdateWithWhereUniqueWithoutSensorsInput | Prisma.DeviceUpdateWithWhereUniqueWithoutSensorsInput[]
-  updateMany?: Prisma.DeviceUpdateManyWithWhereWithoutSensorsInput | Prisma.DeviceUpdateManyWithWhereWithoutSensorsInput[]
-  deleteMany?: Prisma.DeviceScalarWhereInput | Prisma.DeviceScalarWhereInput[]
-}
-
-export type DeviceCreateNestedManyWithoutDeviceFunctionsInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput> | Prisma.DeviceCreateWithoutDeviceFunctionsInput[] | Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput | Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-}
-
-export type DeviceUncheckedCreateNestedManyWithoutDeviceFunctionsInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput> | Prisma.DeviceCreateWithoutDeviceFunctionsInput[] | Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput | Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-}
-
-export type DeviceUpdateManyWithoutDeviceFunctionsNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput> | Prisma.DeviceCreateWithoutDeviceFunctionsInput[] | Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput | Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput[]
-  upsert?: Prisma.DeviceUpsertWithWhereUniqueWithoutDeviceFunctionsInput | Prisma.DeviceUpsertWithWhereUniqueWithoutDeviceFunctionsInput[]
-  set?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  disconnect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  delete?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  update?: Prisma.DeviceUpdateWithWhereUniqueWithoutDeviceFunctionsInput | Prisma.DeviceUpdateWithWhereUniqueWithoutDeviceFunctionsInput[]
-  updateMany?: Prisma.DeviceUpdateManyWithWhereWithoutDeviceFunctionsInput | Prisma.DeviceUpdateManyWithWhereWithoutDeviceFunctionsInput[]
-  deleteMany?: Prisma.DeviceScalarWhereInput | Prisma.DeviceScalarWhereInput[]
-}
-
-export type DeviceUncheckedUpdateManyWithoutDeviceFunctionsNestedInput = {
-  create?: Prisma.XOR<Prisma.DeviceCreateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput> | Prisma.DeviceCreateWithoutDeviceFunctionsInput[] | Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput[]
-  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput | Prisma.DeviceCreateOrConnectWithoutDeviceFunctionsInput[]
-  upsert?: Prisma.DeviceUpsertWithWhereUniqueWithoutDeviceFunctionsInput | Prisma.DeviceUpsertWithWhereUniqueWithoutDeviceFunctionsInput[]
-  set?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  disconnect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  delete?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  connect?: Prisma.DeviceWhereUniqueInput | Prisma.DeviceWhereUniqueInput[]
-  update?: Prisma.DeviceUpdateWithWhereUniqueWithoutDeviceFunctionsInput | Prisma.DeviceUpdateWithWhereUniqueWithoutDeviceFunctionsInput[]
-  updateMany?: Prisma.DeviceUpdateManyWithWhereWithoutDeviceFunctionsInput | Prisma.DeviceUpdateManyWithWhereWithoutDeviceFunctionsInput[]
-  deleteMany?: Prisma.DeviceScalarWhereInput | Prisma.DeviceScalarWhereInput[]
+export type DeviceUpdateOneRequiredWithoutFunctionsNestedInput = {
+  create?: Prisma.XOR<Prisma.DeviceCreateWithoutFunctionsInput, Prisma.DeviceUncheckedCreateWithoutFunctionsInput>
+  connectOrCreate?: Prisma.DeviceCreateOrConnectWithoutFunctionsInput
+  upsert?: Prisma.DeviceUpsertWithoutFunctionsInput
+  connect?: Prisma.DeviceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeviceUpdateToOneWithWhereWithoutFunctionsInput, Prisma.DeviceUpdateWithoutFunctionsInput>, Prisma.DeviceUncheckedUpdateWithoutFunctionsInput>
 }
 
 export type DeviceCreateWithoutSensorsInput = {
   name: string
   ip: string
-  deviceFunctions?: Prisma.DeviceFunctionCreateNestedManyWithoutDevicesInput
+  functions?: Prisma.DeviceFunctionCreateNestedManyWithoutDeviceInput
 }
 
 export type DeviceUncheckedCreateWithoutSensorsInput = {
   id?: number
   name: string
   ip: string
-  deviceFunctions?: Prisma.DeviceFunctionUncheckedCreateNestedManyWithoutDevicesInput
+  functions?: Prisma.DeviceFunctionUncheckedCreateNestedManyWithoutDeviceInput
 }
 
 export type DeviceCreateOrConnectWithoutSensorsInput = {
@@ -420,101 +367,70 @@ export type DeviceCreateOrConnectWithoutSensorsInput = {
   create: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput>
 }
 
-export type DeviceUpsertWithWhereUniqueWithoutSensorsInput = {
-  where: Prisma.DeviceWhereUniqueInput
+export type DeviceUpsertWithoutSensorsInput = {
   update: Prisma.XOR<Prisma.DeviceUpdateWithoutSensorsInput, Prisma.DeviceUncheckedUpdateWithoutSensorsInput>
   create: Prisma.XOR<Prisma.DeviceCreateWithoutSensorsInput, Prisma.DeviceUncheckedCreateWithoutSensorsInput>
+  where?: Prisma.DeviceWhereInput
 }
 
-export type DeviceUpdateWithWhereUniqueWithoutSensorsInput = {
-  where: Prisma.DeviceWhereUniqueInput
+export type DeviceUpdateToOneWithWhereWithoutSensorsInput = {
+  where?: Prisma.DeviceWhereInput
   data: Prisma.XOR<Prisma.DeviceUpdateWithoutSensorsInput, Prisma.DeviceUncheckedUpdateWithoutSensorsInput>
-}
-
-export type DeviceUpdateManyWithWhereWithoutSensorsInput = {
-  where: Prisma.DeviceScalarWhereInput
-  data: Prisma.XOR<Prisma.DeviceUpdateManyMutationInput, Prisma.DeviceUncheckedUpdateManyWithoutSensorsInput>
-}
-
-export type DeviceScalarWhereInput = {
-  AND?: Prisma.DeviceScalarWhereInput | Prisma.DeviceScalarWhereInput[]
-  OR?: Prisma.DeviceScalarWhereInput[]
-  NOT?: Prisma.DeviceScalarWhereInput | Prisma.DeviceScalarWhereInput[]
-  id?: Prisma.IntFilter<"Device"> | number
-  name?: Prisma.StringFilter<"Device"> | string
-  ip?: Prisma.StringFilter<"Device"> | string
-}
-
-export type DeviceCreateWithoutDeviceFunctionsInput = {
-  name: string
-  ip: string
-  sensors?: Prisma.SensorCreateNestedManyWithoutDevicesInput
-}
-
-export type DeviceUncheckedCreateWithoutDeviceFunctionsInput = {
-  id?: number
-  name: string
-  ip: string
-  sensors?: Prisma.SensorUncheckedCreateNestedManyWithoutDevicesInput
-}
-
-export type DeviceCreateOrConnectWithoutDeviceFunctionsInput = {
-  where: Prisma.DeviceWhereUniqueInput
-  create: Prisma.XOR<Prisma.DeviceCreateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput>
-}
-
-export type DeviceUpsertWithWhereUniqueWithoutDeviceFunctionsInput = {
-  where: Prisma.DeviceWhereUniqueInput
-  update: Prisma.XOR<Prisma.DeviceUpdateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedUpdateWithoutDeviceFunctionsInput>
-  create: Prisma.XOR<Prisma.DeviceCreateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedCreateWithoutDeviceFunctionsInput>
-}
-
-export type DeviceUpdateWithWhereUniqueWithoutDeviceFunctionsInput = {
-  where: Prisma.DeviceWhereUniqueInput
-  data: Prisma.XOR<Prisma.DeviceUpdateWithoutDeviceFunctionsInput, Prisma.DeviceUncheckedUpdateWithoutDeviceFunctionsInput>
-}
-
-export type DeviceUpdateManyWithWhereWithoutDeviceFunctionsInput = {
-  where: Prisma.DeviceScalarWhereInput
-  data: Prisma.XOR<Prisma.DeviceUpdateManyMutationInput, Prisma.DeviceUncheckedUpdateManyWithoutDeviceFunctionsInput>
 }
 
 export type DeviceUpdateWithoutSensorsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   ip?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceFunctions?: Prisma.DeviceFunctionUpdateManyWithoutDevicesNestedInput
+  functions?: Prisma.DeviceFunctionUpdateManyWithoutDeviceNestedInput
 }
 
 export type DeviceUncheckedUpdateWithoutSensorsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   ip?: Prisma.StringFieldUpdateOperationsInput | string
-  deviceFunctions?: Prisma.DeviceFunctionUncheckedUpdateManyWithoutDevicesNestedInput
+  functions?: Prisma.DeviceFunctionUncheckedUpdateManyWithoutDeviceNestedInput
 }
 
-export type DeviceUncheckedUpdateManyWithoutSensorsInput = {
+export type DeviceCreateWithoutFunctionsInput = {
+  name: string
+  ip: string
+  sensors?: Prisma.SensorCreateNestedManyWithoutDeviceInput
+}
+
+export type DeviceUncheckedCreateWithoutFunctionsInput = {
+  id?: number
+  name: string
+  ip: string
+  sensors?: Prisma.SensorUncheckedCreateNestedManyWithoutDeviceInput
+}
+
+export type DeviceCreateOrConnectWithoutFunctionsInput = {
+  where: Prisma.DeviceWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeviceCreateWithoutFunctionsInput, Prisma.DeviceUncheckedCreateWithoutFunctionsInput>
+}
+
+export type DeviceUpsertWithoutFunctionsInput = {
+  update: Prisma.XOR<Prisma.DeviceUpdateWithoutFunctionsInput, Prisma.DeviceUncheckedUpdateWithoutFunctionsInput>
+  create: Prisma.XOR<Prisma.DeviceCreateWithoutFunctionsInput, Prisma.DeviceUncheckedCreateWithoutFunctionsInput>
+  where?: Prisma.DeviceWhereInput
+}
+
+export type DeviceUpdateToOneWithWhereWithoutFunctionsInput = {
+  where?: Prisma.DeviceWhereInput
+  data: Prisma.XOR<Prisma.DeviceUpdateWithoutFunctionsInput, Prisma.DeviceUncheckedUpdateWithoutFunctionsInput>
+}
+
+export type DeviceUpdateWithoutFunctionsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ip?: Prisma.StringFieldUpdateOperationsInput | string
+  sensors?: Prisma.SensorUpdateManyWithoutDeviceNestedInput
+}
+
+export type DeviceUncheckedUpdateWithoutFunctionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   ip?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type DeviceUpdateWithoutDeviceFunctionsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  ip?: Prisma.StringFieldUpdateOperationsInput | string
-  sensors?: Prisma.SensorUpdateManyWithoutDevicesNestedInput
-}
-
-export type DeviceUncheckedUpdateWithoutDeviceFunctionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  ip?: Prisma.StringFieldUpdateOperationsInput | string
-  sensors?: Prisma.SensorUncheckedUpdateManyWithoutDevicesNestedInput
-}
-
-export type DeviceUncheckedUpdateManyWithoutDeviceFunctionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  ip?: Prisma.StringFieldUpdateOperationsInput | string
+  sensors?: Prisma.SensorUncheckedUpdateManyWithoutDeviceNestedInput
 }
 
 
@@ -524,12 +440,12 @@ export type DeviceUncheckedUpdateManyWithoutDeviceFunctionsInput = {
 
 export type DeviceCountOutputType = {
   sensors: number
-  deviceFunctions: number
+  functions: number
 }
 
 export type DeviceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sensors?: boolean | DeviceCountOutputTypeCountSensorsArgs
-  deviceFunctions?: boolean | DeviceCountOutputTypeCountDeviceFunctionsArgs
+  functions?: boolean | DeviceCountOutputTypeCountFunctionsArgs
 }
 
 /**
@@ -552,7 +468,7 @@ export type DeviceCountOutputTypeCountSensorsArgs<ExtArgs extends runtime.Types.
 /**
  * DeviceCountOutputType without action
  */
-export type DeviceCountOutputTypeCountDeviceFunctionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type DeviceCountOutputTypeCountFunctionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.DeviceFunctionWhereInput
 }
 
@@ -562,7 +478,7 @@ export type DeviceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name?: boolean
   ip?: boolean
   sensors?: boolean | Prisma.Device$sensorsArgs<ExtArgs>
-  deviceFunctions?: boolean | Prisma.Device$deviceFunctionsArgs<ExtArgs>
+  functions?: boolean | Prisma.Device$functionsArgs<ExtArgs>
   _count?: boolean | Prisma.DeviceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["device"]>
 
@@ -587,7 +503,7 @@ export type DeviceSelectScalar = {
 export type DeviceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "ip", ExtArgs["result"]["device"]>
 export type DeviceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sensors?: boolean | Prisma.Device$sensorsArgs<ExtArgs>
-  deviceFunctions?: boolean | Prisma.Device$deviceFunctionsArgs<ExtArgs>
+  functions?: boolean | Prisma.Device$functionsArgs<ExtArgs>
   _count?: boolean | Prisma.DeviceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DeviceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -597,7 +513,7 @@ export type $DevicePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   name: "Device"
   objects: {
     sensors: Prisma.$SensorPayload<ExtArgs>[]
-    deviceFunctions: Prisma.$DeviceFunctionPayload<ExtArgs>[]
+    functions: Prisma.$DeviceFunctionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -998,7 +914,7 @@ readonly fields: DeviceFieldRefs;
 export interface Prisma__DeviceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sensors<T extends Prisma.Device$sensorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Device$sensorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  deviceFunctions<T extends Prisma.Device$deviceFunctionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Device$deviceFunctionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeviceFunctionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  functions<T extends Prisma.Device$functionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Device$functionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeviceFunctionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1443,9 +1359,9 @@ export type Device$sensorsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * Device.deviceFunctions
+ * Device.functions
  */
-export type Device$deviceFunctionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Device$functionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the DeviceFunction
    */

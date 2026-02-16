@@ -28,62 +28,72 @@ export type AggregateSensor = {
 
 export type SensorAvgAggregateOutputType = {
   id: number | null
+  deviceId: number | null
 }
 
 export type SensorSumAggregateOutputType = {
   id: number | null
+  deviceId: number | null
 }
 
 export type SensorMinAggregateOutputType = {
   id: number | null
   name: $Enums.SensorName | null
   target: string | null
-  sensorType: $Enums.SensorType | null
+  type: $Enums.SensorType | null
+  deviceId: number | null
 }
 
 export type SensorMaxAggregateOutputType = {
   id: number | null
   name: $Enums.SensorName | null
   target: string | null
-  sensorType: $Enums.SensorType | null
+  type: $Enums.SensorType | null
+  deviceId: number | null
 }
 
 export type SensorCountAggregateOutputType = {
   id: number
   name: number
   target: number
-  sensorType: number
+  type: number
+  deviceId: number
   _all: number
 }
 
 
 export type SensorAvgAggregateInputType = {
   id?: true
+  deviceId?: true
 }
 
 export type SensorSumAggregateInputType = {
   id?: true
+  deviceId?: true
 }
 
 export type SensorMinAggregateInputType = {
   id?: true
   name?: true
   target?: true
-  sensorType?: true
+  type?: true
+  deviceId?: true
 }
 
 export type SensorMaxAggregateInputType = {
   id?: true
   name?: true
   target?: true
-  sensorType?: true
+  type?: true
+  deviceId?: true
 }
 
 export type SensorCountAggregateInputType = {
   id?: true
   name?: true
   target?: true
-  sensorType?: true
+  type?: true
+  deviceId?: true
   _all?: true
 }
 
@@ -177,7 +187,8 @@ export type SensorGroupByOutputType = {
   id: number
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
+  deviceId: number
   _count: SensorCountAggregateOutputType | null
   _avg: SensorAvgAggregateOutputType | null
   _sum: SensorSumAggregateOutputType | null
@@ -207,20 +218,24 @@ export type SensorWhereInput = {
   id?: Prisma.IntFilter<"Sensor"> | number
   name?: Prisma.EnumSensorNameFilter<"Sensor"> | $Enums.SensorName
   target?: Prisma.StringFilter<"Sensor"> | string
-  sensorType?: Prisma.EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+  deviceId?: Prisma.IntFilter<"Sensor"> | number
   climates?: Prisma.ClimateListRelationFilter
   soils?: Prisma.SoilListRelationFilter
-  devices?: Prisma.DeviceListRelationFilter
+  device?: Prisma.XOR<Prisma.DeviceScalarRelationFilter, Prisma.DeviceWhereInput>
+  config?: Prisma.XOR<Prisma.SensorConfigNullableScalarRelationFilter, Prisma.SensorConfigWhereInput> | null
 }
 
 export type SensorOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  sensorType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
   climates?: Prisma.ClimateOrderByRelationAggregateInput
   soils?: Prisma.SoilOrderByRelationAggregateInput
-  devices?: Prisma.DeviceOrderByRelationAggregateInput
+  device?: Prisma.DeviceOrderByWithRelationInput
+  config?: Prisma.SensorConfigOrderByWithRelationInput
 }
 
 export type SensorWhereUniqueInput = Prisma.AtLeast<{
@@ -230,17 +245,20 @@ export type SensorWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SensorWhereInput | Prisma.SensorWhereInput[]
   name?: Prisma.EnumSensorNameFilter<"Sensor"> | $Enums.SensorName
   target?: Prisma.StringFilter<"Sensor"> | string
-  sensorType?: Prisma.EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+  deviceId?: Prisma.IntFilter<"Sensor"> | number
   climates?: Prisma.ClimateListRelationFilter
   soils?: Prisma.SoilListRelationFilter
-  devices?: Prisma.DeviceListRelationFilter
+  device?: Prisma.XOR<Prisma.DeviceScalarRelationFilter, Prisma.DeviceWhereInput>
+  config?: Prisma.XOR<Prisma.SensorConfigNullableScalarRelationFilter, Prisma.SensorConfigWhereInput> | null
 }, "id">
 
 export type SensorOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  sensorType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
   _count?: Prisma.SensorCountOrderByAggregateInput
   _avg?: Prisma.SensorAvgOrderByAggregateInput
   _max?: Prisma.SensorMaxOrderByAggregateInput
@@ -255,65 +273,72 @@ export type SensorScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Sensor"> | number
   name?: Prisma.EnumSensorNameWithAggregatesFilter<"Sensor"> | $Enums.SensorName
   target?: Prisma.StringWithAggregatesFilter<"Sensor"> | string
-  sensorType?: Prisma.EnumSensorTypeWithAggregatesFilter<"Sensor"> | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeWithAggregatesFilter<"Sensor"> | $Enums.SensorType
+  deviceId?: Prisma.IntWithAggregatesFilter<"Sensor"> | number
 }
 
 export type SensorCreateInput = {
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
   climates?: Prisma.ClimateCreateNestedManyWithoutSensorInput
   soils?: Prisma.SoilCreateNestedManyWithoutSensorInput
-  devices?: Prisma.DeviceCreateNestedManyWithoutSensorsInput
+  device: Prisma.DeviceCreateNestedOneWithoutSensorsInput
+  config?: Prisma.SensorConfigCreateNestedOneWithoutSensorInput
 }
 
 export type SensorUncheckedCreateInput = {
   id?: number
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
+  deviceId: number
   climates?: Prisma.ClimateUncheckedCreateNestedManyWithoutSensorInput
   soils?: Prisma.SoilUncheckedCreateNestedManyWithoutSensorInput
-  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutSensorsInput
+  config?: Prisma.SensorConfigUncheckedCreateNestedOneWithoutSensorInput
 }
 
 export type SensorUpdateInput = {
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
   climates?: Prisma.ClimateUpdateManyWithoutSensorNestedInput
   soils?: Prisma.SoilUpdateManyWithoutSensorNestedInput
-  devices?: Prisma.DeviceUpdateManyWithoutSensorsNestedInput
+  device?: Prisma.DeviceUpdateOneRequiredWithoutSensorsNestedInput
+  config?: Prisma.SensorConfigUpdateOneWithoutSensorNestedInput
 }
 
 export type SensorUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
   climates?: Prisma.ClimateUncheckedUpdateManyWithoutSensorNestedInput
   soils?: Prisma.SoilUncheckedUpdateManyWithoutSensorNestedInput
-  devices?: Prisma.DeviceUncheckedUpdateManyWithoutSensorsNestedInput
+  config?: Prisma.SensorConfigUncheckedUpdateOneWithoutSensorNestedInput
 }
 
 export type SensorCreateManyInput = {
   id?: number
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
+  deviceId: number
 }
 
 export type SensorUpdateManyMutationInput = {
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
 }
 
 export type SensorUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SensorScalarRelationFilter = {
@@ -335,29 +360,34 @@ export type SensorCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  sensorType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type SensorAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type SensorMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  sensorType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type SensorMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   target?: Prisma.SortOrder
-  sensorType?: Prisma.SortOrder
+  type?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type SensorSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  deviceId?: Prisma.SortOrder
 }
 
 export type SensorCreateNestedOneWithoutClimatesInput = {
@@ -388,41 +418,45 @@ export type SensorUpdateOneRequiredWithoutSoilsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SensorUpdateToOneWithWhereWithoutSoilsInput, Prisma.SensorUpdateWithoutSoilsInput>, Prisma.SensorUncheckedUpdateWithoutSoilsInput>
 }
 
-export type SensorCreateNestedManyWithoutDevicesInput = {
-  create?: Prisma.XOR<Prisma.SensorCreateWithoutDevicesInput, Prisma.SensorUncheckedCreateWithoutDevicesInput> | Prisma.SensorCreateWithoutDevicesInput[] | Prisma.SensorUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDevicesInput | Prisma.SensorCreateOrConnectWithoutDevicesInput[]
+export type SensorCreateNestedManyWithoutDeviceInput = {
+  create?: Prisma.XOR<Prisma.SensorCreateWithoutDeviceInput, Prisma.SensorUncheckedCreateWithoutDeviceInput> | Prisma.SensorCreateWithoutDeviceInput[] | Prisma.SensorUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDeviceInput | Prisma.SensorCreateOrConnectWithoutDeviceInput[]
+  createMany?: Prisma.SensorCreateManyDeviceInputEnvelope
   connect?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
 }
 
-export type SensorUncheckedCreateNestedManyWithoutDevicesInput = {
-  create?: Prisma.XOR<Prisma.SensorCreateWithoutDevicesInput, Prisma.SensorUncheckedCreateWithoutDevicesInput> | Prisma.SensorCreateWithoutDevicesInput[] | Prisma.SensorUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDevicesInput | Prisma.SensorCreateOrConnectWithoutDevicesInput[]
+export type SensorUncheckedCreateNestedManyWithoutDeviceInput = {
+  create?: Prisma.XOR<Prisma.SensorCreateWithoutDeviceInput, Prisma.SensorUncheckedCreateWithoutDeviceInput> | Prisma.SensorCreateWithoutDeviceInput[] | Prisma.SensorUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDeviceInput | Prisma.SensorCreateOrConnectWithoutDeviceInput[]
+  createMany?: Prisma.SensorCreateManyDeviceInputEnvelope
   connect?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
 }
 
-export type SensorUpdateManyWithoutDevicesNestedInput = {
-  create?: Prisma.XOR<Prisma.SensorCreateWithoutDevicesInput, Prisma.SensorUncheckedCreateWithoutDevicesInput> | Prisma.SensorCreateWithoutDevicesInput[] | Prisma.SensorUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDevicesInput | Prisma.SensorCreateOrConnectWithoutDevicesInput[]
-  upsert?: Prisma.SensorUpsertWithWhereUniqueWithoutDevicesInput | Prisma.SensorUpsertWithWhereUniqueWithoutDevicesInput[]
+export type SensorUpdateManyWithoutDeviceNestedInput = {
+  create?: Prisma.XOR<Prisma.SensorCreateWithoutDeviceInput, Prisma.SensorUncheckedCreateWithoutDeviceInput> | Prisma.SensorCreateWithoutDeviceInput[] | Prisma.SensorUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDeviceInput | Prisma.SensorCreateOrConnectWithoutDeviceInput[]
+  upsert?: Prisma.SensorUpsertWithWhereUniqueWithoutDeviceInput | Prisma.SensorUpsertWithWhereUniqueWithoutDeviceInput[]
+  createMany?: Prisma.SensorCreateManyDeviceInputEnvelope
   set?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
   disconnect?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
   delete?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
   connect?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
-  update?: Prisma.SensorUpdateWithWhereUniqueWithoutDevicesInput | Prisma.SensorUpdateWithWhereUniqueWithoutDevicesInput[]
-  updateMany?: Prisma.SensorUpdateManyWithWhereWithoutDevicesInput | Prisma.SensorUpdateManyWithWhereWithoutDevicesInput[]
+  update?: Prisma.SensorUpdateWithWhereUniqueWithoutDeviceInput | Prisma.SensorUpdateWithWhereUniqueWithoutDeviceInput[]
+  updateMany?: Prisma.SensorUpdateManyWithWhereWithoutDeviceInput | Prisma.SensorUpdateManyWithWhereWithoutDeviceInput[]
   deleteMany?: Prisma.SensorScalarWhereInput | Prisma.SensorScalarWhereInput[]
 }
 
-export type SensorUncheckedUpdateManyWithoutDevicesNestedInput = {
-  create?: Prisma.XOR<Prisma.SensorCreateWithoutDevicesInput, Prisma.SensorUncheckedCreateWithoutDevicesInput> | Prisma.SensorCreateWithoutDevicesInput[] | Prisma.SensorUncheckedCreateWithoutDevicesInput[]
-  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDevicesInput | Prisma.SensorCreateOrConnectWithoutDevicesInput[]
-  upsert?: Prisma.SensorUpsertWithWhereUniqueWithoutDevicesInput | Prisma.SensorUpsertWithWhereUniqueWithoutDevicesInput[]
+export type SensorUncheckedUpdateManyWithoutDeviceNestedInput = {
+  create?: Prisma.XOR<Prisma.SensorCreateWithoutDeviceInput, Prisma.SensorUncheckedCreateWithoutDeviceInput> | Prisma.SensorCreateWithoutDeviceInput[] | Prisma.SensorUncheckedCreateWithoutDeviceInput[]
+  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutDeviceInput | Prisma.SensorCreateOrConnectWithoutDeviceInput[]
+  upsert?: Prisma.SensorUpsertWithWhereUniqueWithoutDeviceInput | Prisma.SensorUpsertWithWhereUniqueWithoutDeviceInput[]
+  createMany?: Prisma.SensorCreateManyDeviceInputEnvelope
   set?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
   disconnect?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
   delete?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
   connect?: Prisma.SensorWhereUniqueInput | Prisma.SensorWhereUniqueInput[]
-  update?: Prisma.SensorUpdateWithWhereUniqueWithoutDevicesInput | Prisma.SensorUpdateWithWhereUniqueWithoutDevicesInput[]
-  updateMany?: Prisma.SensorUpdateManyWithWhereWithoutDevicesInput | Prisma.SensorUpdateManyWithWhereWithoutDevicesInput[]
+  update?: Prisma.SensorUpdateWithWhereUniqueWithoutDeviceInput | Prisma.SensorUpdateWithWhereUniqueWithoutDeviceInput[]
+  updateMany?: Prisma.SensorUpdateManyWithWhereWithoutDeviceInput | Prisma.SensorUpdateManyWithWhereWithoutDeviceInput[]
   deleteMany?: Prisma.SensorScalarWhereInput | Prisma.SensorScalarWhereInput[]
 }
 
@@ -434,21 +468,37 @@ export type EnumSensorTypeFieldUpdateOperationsInput = {
   set?: $Enums.SensorType
 }
 
+export type SensorCreateNestedOneWithoutConfigInput = {
+  create?: Prisma.XOR<Prisma.SensorCreateWithoutConfigInput, Prisma.SensorUncheckedCreateWithoutConfigInput>
+  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutConfigInput
+  connect?: Prisma.SensorWhereUniqueInput
+}
+
+export type SensorUpdateOneRequiredWithoutConfigNestedInput = {
+  create?: Prisma.XOR<Prisma.SensorCreateWithoutConfigInput, Prisma.SensorUncheckedCreateWithoutConfigInput>
+  connectOrCreate?: Prisma.SensorCreateOrConnectWithoutConfigInput
+  upsert?: Prisma.SensorUpsertWithoutConfigInput
+  connect?: Prisma.SensorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SensorUpdateToOneWithWhereWithoutConfigInput, Prisma.SensorUpdateWithoutConfigInput>, Prisma.SensorUncheckedUpdateWithoutConfigInput>
+}
+
 export type SensorCreateWithoutClimatesInput = {
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
   soils?: Prisma.SoilCreateNestedManyWithoutSensorInput
-  devices?: Prisma.DeviceCreateNestedManyWithoutSensorsInput
+  device: Prisma.DeviceCreateNestedOneWithoutSensorsInput
+  config?: Prisma.SensorConfigCreateNestedOneWithoutSensorInput
 }
 
 export type SensorUncheckedCreateWithoutClimatesInput = {
   id?: number
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
+  deviceId: number
   soils?: Prisma.SoilUncheckedCreateNestedManyWithoutSensorInput
-  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutSensorsInput
+  config?: Prisma.SensorConfigUncheckedCreateNestedOneWithoutSensorInput
 }
 
 export type SensorCreateOrConnectWithoutClimatesInput = {
@@ -470,35 +520,39 @@ export type SensorUpdateToOneWithWhereWithoutClimatesInput = {
 export type SensorUpdateWithoutClimatesInput = {
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
   soils?: Prisma.SoilUpdateManyWithoutSensorNestedInput
-  devices?: Prisma.DeviceUpdateManyWithoutSensorsNestedInput
+  device?: Prisma.DeviceUpdateOneRequiredWithoutSensorsNestedInput
+  config?: Prisma.SensorConfigUpdateOneWithoutSensorNestedInput
 }
 
 export type SensorUncheckedUpdateWithoutClimatesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
   soils?: Prisma.SoilUncheckedUpdateManyWithoutSensorNestedInput
-  devices?: Prisma.DeviceUncheckedUpdateManyWithoutSensorsNestedInput
+  config?: Prisma.SensorConfigUncheckedUpdateOneWithoutSensorNestedInput
 }
 
 export type SensorCreateWithoutSoilsInput = {
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
   climates?: Prisma.ClimateCreateNestedManyWithoutSensorInput
-  devices?: Prisma.DeviceCreateNestedManyWithoutSensorsInput
+  device: Prisma.DeviceCreateNestedOneWithoutSensorsInput
+  config?: Prisma.SensorConfigCreateNestedOneWithoutSensorInput
 }
 
 export type SensorUncheckedCreateWithoutSoilsInput = {
   id?: number
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
+  deviceId: number
   climates?: Prisma.ClimateUncheckedCreateNestedManyWithoutSensorInput
-  devices?: Prisma.DeviceUncheckedCreateNestedManyWithoutSensorsInput
+  config?: Prisma.SensorConfigUncheckedCreateNestedOneWithoutSensorInput
 }
 
 export type SensorCreateOrConnectWithoutSoilsInput = {
@@ -520,56 +574,65 @@ export type SensorUpdateToOneWithWhereWithoutSoilsInput = {
 export type SensorUpdateWithoutSoilsInput = {
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
   climates?: Prisma.ClimateUpdateManyWithoutSensorNestedInput
-  devices?: Prisma.DeviceUpdateManyWithoutSensorsNestedInput
+  device?: Prisma.DeviceUpdateOneRequiredWithoutSensorsNestedInput
+  config?: Prisma.SensorConfigUpdateOneWithoutSensorNestedInput
 }
 
 export type SensorUncheckedUpdateWithoutSoilsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
   climates?: Prisma.ClimateUncheckedUpdateManyWithoutSensorNestedInput
-  devices?: Prisma.DeviceUncheckedUpdateManyWithoutSensorsNestedInput
+  config?: Prisma.SensorConfigUncheckedUpdateOneWithoutSensorNestedInput
 }
 
-export type SensorCreateWithoutDevicesInput = {
+export type SensorCreateWithoutDeviceInput = {
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
   climates?: Prisma.ClimateCreateNestedManyWithoutSensorInput
   soils?: Prisma.SoilCreateNestedManyWithoutSensorInput
+  config?: Prisma.SensorConfigCreateNestedOneWithoutSensorInput
 }
 
-export type SensorUncheckedCreateWithoutDevicesInput = {
+export type SensorUncheckedCreateWithoutDeviceInput = {
   id?: number
   name: $Enums.SensorName
   target: string
-  sensorType: $Enums.SensorType
+  type: $Enums.SensorType
   climates?: Prisma.ClimateUncheckedCreateNestedManyWithoutSensorInput
   soils?: Prisma.SoilUncheckedCreateNestedManyWithoutSensorInput
+  config?: Prisma.SensorConfigUncheckedCreateNestedOneWithoutSensorInput
 }
 
-export type SensorCreateOrConnectWithoutDevicesInput = {
+export type SensorCreateOrConnectWithoutDeviceInput = {
   where: Prisma.SensorWhereUniqueInput
-  create: Prisma.XOR<Prisma.SensorCreateWithoutDevicesInput, Prisma.SensorUncheckedCreateWithoutDevicesInput>
+  create: Prisma.XOR<Prisma.SensorCreateWithoutDeviceInput, Prisma.SensorUncheckedCreateWithoutDeviceInput>
 }
 
-export type SensorUpsertWithWhereUniqueWithoutDevicesInput = {
+export type SensorCreateManyDeviceInputEnvelope = {
+  data: Prisma.SensorCreateManyDeviceInput | Prisma.SensorCreateManyDeviceInput[]
+  skipDuplicates?: boolean
+}
+
+export type SensorUpsertWithWhereUniqueWithoutDeviceInput = {
   where: Prisma.SensorWhereUniqueInput
-  update: Prisma.XOR<Prisma.SensorUpdateWithoutDevicesInput, Prisma.SensorUncheckedUpdateWithoutDevicesInput>
-  create: Prisma.XOR<Prisma.SensorCreateWithoutDevicesInput, Prisma.SensorUncheckedCreateWithoutDevicesInput>
+  update: Prisma.XOR<Prisma.SensorUpdateWithoutDeviceInput, Prisma.SensorUncheckedUpdateWithoutDeviceInput>
+  create: Prisma.XOR<Prisma.SensorCreateWithoutDeviceInput, Prisma.SensorUncheckedCreateWithoutDeviceInput>
 }
 
-export type SensorUpdateWithWhereUniqueWithoutDevicesInput = {
+export type SensorUpdateWithWhereUniqueWithoutDeviceInput = {
   where: Prisma.SensorWhereUniqueInput
-  data: Prisma.XOR<Prisma.SensorUpdateWithoutDevicesInput, Prisma.SensorUncheckedUpdateWithoutDevicesInput>
+  data: Prisma.XOR<Prisma.SensorUpdateWithoutDeviceInput, Prisma.SensorUncheckedUpdateWithoutDeviceInput>
 }
 
-export type SensorUpdateManyWithWhereWithoutDevicesInput = {
+export type SensorUpdateManyWithWhereWithoutDeviceInput = {
   where: Prisma.SensorScalarWhereInput
-  data: Prisma.XOR<Prisma.SensorUpdateManyMutationInput, Prisma.SensorUncheckedUpdateManyWithoutDevicesInput>
+  data: Prisma.XOR<Prisma.SensorUpdateManyMutationInput, Prisma.SensorUncheckedUpdateManyWithoutDeviceInput>
 }
 
 export type SensorScalarWhereInput = {
@@ -579,31 +642,95 @@ export type SensorScalarWhereInput = {
   id?: Prisma.IntFilter<"Sensor"> | number
   name?: Prisma.EnumSensorNameFilter<"Sensor"> | $Enums.SensorName
   target?: Prisma.StringFilter<"Sensor"> | string
-  sensorType?: Prisma.EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFilter<"Sensor"> | $Enums.SensorType
+  deviceId?: Prisma.IntFilter<"Sensor"> | number
 }
 
-export type SensorUpdateWithoutDevicesInput = {
+export type SensorCreateWithoutConfigInput = {
+  name: $Enums.SensorName
+  target: string
+  type: $Enums.SensorType
+  climates?: Prisma.ClimateCreateNestedManyWithoutSensorInput
+  soils?: Prisma.SoilCreateNestedManyWithoutSensorInput
+  device: Prisma.DeviceCreateNestedOneWithoutSensorsInput
+}
+
+export type SensorUncheckedCreateWithoutConfigInput = {
+  id?: number
+  name: $Enums.SensorName
+  target: string
+  type: $Enums.SensorType
+  deviceId: number
+  climates?: Prisma.ClimateUncheckedCreateNestedManyWithoutSensorInput
+  soils?: Prisma.SoilUncheckedCreateNestedManyWithoutSensorInput
+}
+
+export type SensorCreateOrConnectWithoutConfigInput = {
+  where: Prisma.SensorWhereUniqueInput
+  create: Prisma.XOR<Prisma.SensorCreateWithoutConfigInput, Prisma.SensorUncheckedCreateWithoutConfigInput>
+}
+
+export type SensorUpsertWithoutConfigInput = {
+  update: Prisma.XOR<Prisma.SensorUpdateWithoutConfigInput, Prisma.SensorUncheckedUpdateWithoutConfigInput>
+  create: Prisma.XOR<Prisma.SensorCreateWithoutConfigInput, Prisma.SensorUncheckedCreateWithoutConfigInput>
+  where?: Prisma.SensorWhereInput
+}
+
+export type SensorUpdateToOneWithWhereWithoutConfigInput = {
+  where?: Prisma.SensorWhereInput
+  data: Prisma.XOR<Prisma.SensorUpdateWithoutConfigInput, Prisma.SensorUncheckedUpdateWithoutConfigInput>
+}
+
+export type SensorUpdateWithoutConfigInput = {
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
   climates?: Prisma.ClimateUpdateManyWithoutSensorNestedInput
   soils?: Prisma.SoilUpdateManyWithoutSensorNestedInput
+  device?: Prisma.DeviceUpdateOneRequiredWithoutSensorsNestedInput
 }
 
-export type SensorUncheckedUpdateWithoutDevicesInput = {
+export type SensorUncheckedUpdateWithoutConfigInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  deviceId?: Prisma.IntFieldUpdateOperationsInput | number
   climates?: Prisma.ClimateUncheckedUpdateManyWithoutSensorNestedInput
   soils?: Prisma.SoilUncheckedUpdateManyWithoutSensorNestedInput
 }
 
-export type SensorUncheckedUpdateManyWithoutDevicesInput = {
+export type SensorCreateManyDeviceInput = {
+  id?: number
+  name: $Enums.SensorName
+  target: string
+  type: $Enums.SensorType
+}
+
+export type SensorUpdateWithoutDeviceInput = {
+  name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
+  target?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  climates?: Prisma.ClimateUpdateManyWithoutSensorNestedInput
+  soils?: Prisma.SoilUpdateManyWithoutSensorNestedInput
+  config?: Prisma.SensorConfigUpdateOneWithoutSensorNestedInput
+}
+
+export type SensorUncheckedUpdateWithoutDeviceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
   target?: Prisma.StringFieldUpdateOperationsInput | string
-  sensorType?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
+  climates?: Prisma.ClimateUncheckedUpdateManyWithoutSensorNestedInput
+  soils?: Prisma.SoilUncheckedUpdateManyWithoutSensorNestedInput
+  config?: Prisma.SensorConfigUncheckedUpdateOneWithoutSensorNestedInput
+}
+
+export type SensorUncheckedUpdateManyWithoutDeviceInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.EnumSensorNameFieldUpdateOperationsInput | $Enums.SensorName
+  target?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumSensorTypeFieldUpdateOperationsInput | $Enums.SensorType
 }
 
 
@@ -614,13 +741,11 @@ export type SensorUncheckedUpdateManyWithoutDevicesInput = {
 export type SensorCountOutputType = {
   climates: number
   soils: number
-  devices: number
 }
 
 export type SensorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   climates?: boolean | SensorCountOutputTypeCountClimatesArgs
   soils?: boolean | SensorCountOutputTypeCountSoilsArgs
-  devices?: boolean | SensorCountOutputTypeCountDevicesArgs
 }
 
 /**
@@ -647,22 +772,17 @@ export type SensorCountOutputTypeCountSoilsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.SoilWhereInput
 }
 
-/**
- * SensorCountOutputType without action
- */
-export type SensorCountOutputTypeCountDevicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DeviceWhereInput
-}
-
 
 export type SensorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   target?: boolean
-  sensorType?: boolean
+  type?: boolean
+  deviceId?: boolean
   climates?: boolean | Prisma.Sensor$climatesArgs<ExtArgs>
   soils?: boolean | Prisma.Sensor$soilsArgs<ExtArgs>
-  devices?: boolean | Prisma.Sensor$devicesArgs<ExtArgs>
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
+  config?: boolean | Prisma.Sensor$configArgs<ExtArgs>
   _count?: boolean | Prisma.SensorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sensor"]>
 
@@ -670,45 +790,57 @@ export type SensorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   target?: boolean
-  sensorType?: boolean
+  type?: boolean
+  deviceId?: boolean
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sensor"]>
 
 export type SensorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   target?: boolean
-  sensorType?: boolean
+  type?: boolean
+  deviceId?: boolean
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sensor"]>
 
 export type SensorSelectScalar = {
   id?: boolean
   name?: boolean
   target?: boolean
-  sensorType?: boolean
+  type?: boolean
+  deviceId?: boolean
 }
 
-export type SensorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "target" | "sensorType", ExtArgs["result"]["sensor"]>
+export type SensorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "target" | "type" | "deviceId", ExtArgs["result"]["sensor"]>
 export type SensorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   climates?: boolean | Prisma.Sensor$climatesArgs<ExtArgs>
   soils?: boolean | Prisma.Sensor$soilsArgs<ExtArgs>
-  devices?: boolean | Prisma.Sensor$devicesArgs<ExtArgs>
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
+  config?: boolean | Prisma.Sensor$configArgs<ExtArgs>
   _count?: boolean | Prisma.SensorCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type SensorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type SensorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type SensorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
+}
+export type SensorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  device?: boolean | Prisma.DeviceDefaultArgs<ExtArgs>
+}
 
 export type $SensorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Sensor"
   objects: {
     climates: Prisma.$ClimatePayload<ExtArgs>[]
     soils: Prisma.$SoilPayload<ExtArgs>[]
-    devices: Prisma.$DevicePayload<ExtArgs>[]
+    device: Prisma.$DevicePayload<ExtArgs>
+    config: Prisma.$SensorConfigPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     name: $Enums.SensorName
     target: string
-    sensorType: $Enums.SensorType
+    type: $Enums.SensorType
+    deviceId: number
   }, ExtArgs["result"]["sensor"]>
   composites: {}
 }
@@ -1105,7 +1237,8 @@ export interface Prisma__SensorClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   climates<T extends Prisma.Sensor$climatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sensor$climatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClimatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   soils<T extends Prisma.Sensor$soilsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sensor$soilsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SoilPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  devices<T extends Prisma.Sensor$devicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sensor$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  device<T extends Prisma.DeviceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DeviceDefaultArgs<ExtArgs>>): Prisma.Prisma__DeviceClient<runtime.Types.Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  config<T extends Prisma.Sensor$configArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sensor$configArgs<ExtArgs>>): Prisma.Prisma__SensorConfigClient<runtime.Types.Result.GetResult<Prisma.$SensorConfigPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1138,7 +1271,8 @@ export interface SensorFieldRefs {
   readonly id: Prisma.FieldRef<"Sensor", 'Int'>
   readonly name: Prisma.FieldRef<"Sensor", 'SensorName'>
   readonly target: Prisma.FieldRef<"Sensor", 'String'>
-  readonly sensorType: Prisma.FieldRef<"Sensor", 'SensorType'>
+  readonly type: Prisma.FieldRef<"Sensor", 'SensorType'>
+  readonly deviceId: Prisma.FieldRef<"Sensor", 'Int'>
 }
     
 
@@ -1388,6 +1522,10 @@ export type SensorCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.SensorCreateManyInput | Prisma.SensorCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SensorIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1458,6 +1596,10 @@ export type SensorUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Sensors to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SensorIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1575,27 +1717,22 @@ export type Sensor$soilsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 /**
- * Sensor.devices
+ * Sensor.config
  */
-export type Sensor$devicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Sensor$configArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Device
+   * Select specific fields to fetch from the SensorConfig
    */
-  select?: Prisma.DeviceSelect<ExtArgs> | null
+  select?: Prisma.SensorConfigSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Device
+   * Omit specific fields from the SensorConfig
    */
-  omit?: Prisma.DeviceOmit<ExtArgs> | null
+  omit?: Prisma.SensorConfigOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.DeviceInclude<ExtArgs> | null
-  where?: Prisma.DeviceWhereInput
-  orderBy?: Prisma.DeviceOrderByWithRelationInput | Prisma.DeviceOrderByWithRelationInput[]
-  cursor?: Prisma.DeviceWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DeviceScalarFieldEnum | Prisma.DeviceScalarFieldEnum[]
+  include?: Prisma.SensorConfigInclude<ExtArgs> | null
+  where?: Prisma.SensorConfigWhereInput
 }
 
 /**

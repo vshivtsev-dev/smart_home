@@ -1,28 +1,28 @@
 import {getTargetNumber} from "@/helpers/getTargetNumber";
 import {prisma} from "@/utils/db/prisma/prisma";
+import {getPins} from "@/utils/device/getPins";
 
 export async function getDeviceFunction(deviceFunctionId: number) {
-  const deviceFunction = await prisma.deviceFunction.findUnique({
+  return prisma.deviceFunction.findUnique({
     where: { id: deviceFunctionId },
     include: { config: true },
   });
-  if (!deviceFunction) {
-    return;
-  }
-  return deviceFunction;
 }
 
-export async function getDeviceFunctionForIot(deviceFunctionId: number) {
+export async function getDeviceFunctionBody(deviceFunctionId: number) {
   const deviceFunction = await getDeviceFunction(deviceFunctionId);
-  if (!deviceFunction) {
+  if (!deviceFunction || !deviceFunction.config) {
     return;
   }
-  const functionName = deviceFunction.functionType.toLowerCase();
+
+  const functionType = deviceFunction.type;
   const targetNumber = getTargetNumber(deviceFunction.target);
+  const pins = await getPins(deviceFunctionId, "FUNCTION");
   return {
-    [functionName]: {
+    [functionType]: {
       [targetNumber]: {
-        duration: deviceFunction.config[0].duration,
+        pins,
+        duration: deviceFunction.config.duration,
       },
     },
   };

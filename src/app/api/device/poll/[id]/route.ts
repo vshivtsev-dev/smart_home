@@ -1,5 +1,5 @@
 import {prisma} from "@/utils/db/prisma/prisma";
-import {getSensorsArray} from "@/utils/device/getSensors";
+import {getSensorsBody} from "@/utils/device/getSensors";
 import {postToDevice} from "@/utils/device/postToDevice";
 
 interface Context {
@@ -19,7 +19,7 @@ export async function GET(request: Request, context: Context) {
 
   // const functions = await getDeviceFunctionForIot(1);
   // const deviceResponse = await postToDevice(device.ip, { functions });
-  const sensors = await getSensorsArray(device.id);
+  const sensors = await getSensorsBody(device.id);
   const deviceResponse = await postToDevice(device.ip, { sensors });
   return Response.json(deviceResponse);
 }

@@ -19,6 +19,15 @@ enum FunctionType {
   @@schema("public")
 }
 
+enum PinName {
+  ANALOG
+  DIGITAL
+  SCL
+  SDA
+
+  @@schema("public")
+}
+
 model Climate {
   id          Int      @id @default(autoincrement())
   sensorId    Int
@@ -53,43 +62,79 @@ model Device {
   name String
   ip   String
 
-  sensors         Sensor[]
-  deviceFunctions DeviceFunction[]
+  sensors   Sensor[]
+  functions DeviceFunction[]
 
   @@schema("public")
 }
 
 model Sensor {
-  id         Int        @id @default(autoincrement())
-  name       SensorName
-  target     String
-  sensorType SensorType
+  id       Int        @id @default(autoincrement())
+  name     SensorName
+  target   String
+  type     SensorType
+  deviceId Int
 
   climates Climate[]
   soils    Soil[]
-  devices  Device[]
+  device   Device        @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  config   SensorConfig?
+
+  @@index([deviceId])
+  @@schema("public")
+}
+
+model SensorConfig {
+  id       Int  @id @default(autoincrement())
+  sensorId Int  @unique
+  dry      Int?
+  wet      Int?
+
+  sensor Sensor      @relation(fields: [sensorId], references: [id], onDelete: Cascade)
+  pins   DevicePin[]
 
   @@schema("public")
 }
 
+model DevicePin {
+  id     Int     @id @default(autoincrement())
+  name   PinName
+  number Int
+
+  sensorConfigId   Int?
+  functionConfigId Int?
+
+  sensorConfig   SensorConfig?   @relation(fields: [sensorConfigId], references: [id], onDelete: Cascade)
+  functionConfig FunctionConfig? @relation(fields: [functionConfigId], references: [id], onDelete: Cascade)
+
+  @@unique([sensorConfigId, name])
+  @@unique([functionConfigId, name])
+  @@schema("public")
+}
+
 model DeviceFunction {
-  id           Int          @id @default(autoincrement())
-  name         String
-  target       String
-  functionType FunctionType
+  id       Int          @id @default(autoincrement())
+  name     String
+  target   String
+  type     FunctionType
+  deviceId Int
 
-  devices Device[]
-  config  FunctionConfig[]
+  device Device          @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  config FunctionConfig?
 
+  @@index([deviceId])
   @@schema("public")
 }
 
 model FunctionConfig {
   id          Int @id @default(autoincrement())
+  functionId  Int @unique
   duration    Int
   minMoisture Int
 
-  DeviceFunction DeviceFunction[]
+  function DeviceFunction @relation(fields: [functionId], references: [id], onDelete: Cascade)
+  pins     DevicePin[]
 
+  @@index([functionId])
   @@schema("public")
 }
