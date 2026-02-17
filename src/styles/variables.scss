@@ -1,8 +1,10 @@
 :root {
   //color
-  --primary-color: #d1d1d1;
+  --primary-text-color: #d1d1d1;
   --primary-bg-color: #222;
   --primary-bg-color-hover: #333;
+  --blue: #4682B4;
+  --red: #ff622c;
   --border-color: rgb(0, 0, 0, 0.30);
   @media (prefers-color-scheme: light) {
     --primary-bg-color: #F5F5F5;
@@ -20,7 +22,7 @@
 
   //box-shadow
   --box-shadow: var(--border-color) 0 0 7px 1px;
-  
+
   //--border-radius
   --border-radius: 10px;
 }

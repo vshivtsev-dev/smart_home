@@ -1,5 +1,6 @@
 import Card from "@/components/card/Card";
 import CardList from "@/components/cardList/CardList";
+import {Recharts} from "@/components/recharts/Recharts";
 import {prisma} from "@/utils/db/prisma/prisma";
 
 export const dynamic = "force-dynamic";
@@ -9,7 +10,6 @@ export default async function () {
     where: { type: "CLIMATE" },
     include: {
       climates: {
-        orderBy: { id: "desc" },
         take: 24,
       },
     },
@@ -21,30 +21,15 @@ export default async function () {
         {sensors.map((sensor) => (
           <Card key={sensor.id}>
             {sensor.name}:{sensor.target}
-            <div style={{ display: "flex", gap: "var(--gap-l)" }}>
-              <ul style={{ listStyle: "none" }}>
-                {sensor.climates.map((climate) => (
-                  <li key={climate.id}>
-                    {climate.createdAt.toLocaleTimeString([], {
-                      timeStyle: "short",
-                      hourCycle: "h24",
-                    })}
-                    : {climate.temperature}
-                  </li>
-                ))}
-              </ul>
-              <ul style={{ listStyle: "none" }}>
-                {sensor.climates.map((climate) => (
-                  <li key={climate.id}>
-                    {climate.createdAt.toLocaleTimeString([], {
-                      timeStyle: "short",
-                      hourCycle: "h24",
-                    })}
-                    : {climate.humidity}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <Recharts
+              data={sensor.climates.map((climat) => {
+                return {
+                  createdAt: climat.createdAt,
+                  temperature: climat.temperature,
+                  humidity: climat.humidity,
+                };
+              })}
+            />
           </Card>
         ))}
       </CardList>
