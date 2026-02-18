@@ -10,6 +10,7 @@ export default async function () {
     where: { type: "CLIMATE" },
     include: {
       climates: {
+        orderBy: { createdAt: "desc" },
         take: 24,
       },
     },
@@ -22,7 +23,7 @@ export default async function () {
           <Card key={sensor.id}>
             {sensor.name}:{sensor.target}
             <Recharts
-              data={sensor.climates.map((climat) => {
+              data={sensor.climates.reverse().map((climat) => {
                 return {
                   createdAt: climat.createdAt,
                   temperature: climat.temperature,

@@ -2,6 +2,7 @@
 
 import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis,} from "recharts";
 import type {ChartData} from "recharts/types/state/chartDataSlice";
+import styles from "./recharts.module.scss";
 
 export function Recharts({ data }: { data: ChartData }) {
   return (
@@ -14,7 +15,7 @@ export function Recharts({ data }: { data: ChartData }) {
       }}
       responsive
       data={data}
-      className="no-outline" // Применяем класс для отключения выделения
+      className={styles.recharts} // Применяем класс для отключения выделения
     >
       <CartesianGrid strokeDasharray="1 10" />
       <XAxis
