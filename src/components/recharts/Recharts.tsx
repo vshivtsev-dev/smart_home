@@ -1,23 +1,31 @@
 "use client";
 
-import {CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis,} from "recharts";
+import {CartesianGrid, Legend, Line, LineChart, type LineProps, Tooltip, XAxis, YAxis,} from "recharts";
 import type {ChartData} from "recharts/types/state/chartDataSlice";
 import styles from "./recharts.module.scss";
 
-export function Recharts({ data }: { data: ChartData }) {
+export function Recharts({
+  data,
+  config,
+}: {
+  data: ChartData;
+  config: {
+    lines: LineProps[];
+  };
+}) {
   return (
     <LineChart
       style={{
         width: "100%",
         aspectRatio: 1.618,
         flexShrink: 0,
-        maxHeight: 300,
+        maxHeight: "70vh",
       }}
       responsive
       data={data}
-      className={styles.recharts} // Применяем класс для отключения выделения
+      className={styles.recharts}
     >
-      <CartesianGrid strokeDasharray="1 10" />
+      <CartesianGrid strokeOpacity={0.1} />
       <XAxis
         dataKey="createdAt"
         tickFormatter={(date) =>
@@ -28,12 +36,12 @@ export function Recharts({ data }: { data: ChartData }) {
         }
       />
       <YAxis />
-      <Legend wrapperStyle={{ bottom: 10, right: 30 }} />
+      <Legend />
       <Tooltip
         contentStyle={{
           backgroundColor: "var(--primary-bg-color)",
           color: "var(--primary-text-color)",
-          border: "none",
+          borderColor: "var(--border-color)",
           borderRadius: "var(--border-radius)",
           boxShadow: "var(--box-shadow)",
         }}
@@ -52,18 +60,15 @@ export function Recharts({ data }: { data: ChartData }) {
           })
         }
       />
-      <Line
-        type="monotone"
-        dataKey="temperature"
-        stroke="var(--red)" // Красный
-        name="Температура (°C)"
-      />
-      <Line
-        type="monotone"
-        dataKey="humidity"
-        stroke="var(--blue)" // Синий
-        name="Влажность (%)"
-      />
+      {config.lines.map((line) => (
+        <Line
+          key={line.key}
+          type="monotone"
+          dataKey={line.key as string}
+          stroke={line.color}
+          name={line.name}
+        />
+      ))}
     </LineChart>
   );
 }

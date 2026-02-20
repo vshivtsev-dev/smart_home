@@ -30,6 +30,20 @@ export default async function () {
                   humidity: climat.humidity,
                 };
               })}
+              config={{
+                lines: [
+                  {
+                    key: "temperature",
+                    name: "Temperature °C",
+                    color: "var(--red)",
+                  },
+                  {
+                    key: "humidity",
+                    name: "Humidity %",
+                    color: "var(--blue)",
+                  },
+                ],
+              }}
             />
           </Card>
         ))}

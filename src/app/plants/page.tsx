@@ -1,15 +1,16 @@
 import Card from "@/components/card/Card";
 import CardList from "@/components/cardList/CardList";
+import {Recharts} from "@/components/recharts/Recharts";
 import {prisma} from "@/utils/db/prisma/prisma";
 
 export const dynamic = "force-dynamic";
 
 export default async function () {
-  const plants = await prisma.sensor.findMany({
+  const sensors = await prisma.sensor.findMany({
     where: { type: "SOIL" },
     include: {
       soils: {
-        orderBy: { id: "desc" },
+        orderBy: { createdAt: "desc" },
         take: 24,
       },
     },
@@ -18,20 +19,26 @@ export default async function () {
     <div>
       <h1>Plants</h1>
       <CardList>
-        {plants.map((sensor) => (
+        {sensors.map((sensor) => (
           <Card key={sensor.id}>
             {sensor.name}:{sensor.target}
-            <ul style={{ listStyle: "none" }}>
-              {sensor.soils.map((soil) => (
-                <li key={soil.id}>
-                  {soil.createdAt.toLocaleTimeString([], {
-                    timeStyle: "short",
-                    hourCycle: "h24",
-                  })}
-                  : {soil.moisture}
-                </li>
-              ))}
-            </ul>
+            <Recharts
+              data={sensor.soils.reverse().map((soil) => {
+                return {
+                  createdAt: soil.createdAt,
+                  moisture: soil.moisture,
+                };
+              })}
+              config={{
+                lines: [
+                  {
+                    key: "moisture",
+                    name: "Moisture %",
+                    color: "var(--blue)",
+                  },
+                ],
+              }}
+            />
           </Card>
         ))}
       </CardList>
