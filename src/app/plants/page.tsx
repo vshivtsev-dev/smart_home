@@ -1,12 +1,13 @@
+import {cacheTag} from "next/cache";
 import Card from "@/components/card/Card";
 import CardList from "@/components/cardList/CardList";
 import {Recharts} from "@/components/recharts/Recharts";
 import {prisma} from "@/utils/db/prisma/prisma";
 
-export const dynamic = "force-dynamic";
-
-export default async function () {
-  const sensors = await prisma.sensor.findMany({
+async function getSensorsWithSoils() {
+  "use cache";
+  cacheTag("soil");
+  return prisma.sensor.findMany({
     where: { type: "SOIL" },
     include: {
       soils: {
@@ -15,6 +16,10 @@ export default async function () {
       },
     },
   });
+}
+
+export default async function () {
+  const sensors = await getSensorsWithSoils();
   return (
     <div>
       <h1>Plants</h1>

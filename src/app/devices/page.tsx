@@ -1,7 +1,10 @@
+import {cacheTag} from "next/cache";
 import {prisma} from "@/utils/db/prisma/prisma";
 
-export default async function () {
-  const devices = await prisma.device.findMany({
+async function getDevices() {
+  "use cache";
+  cacheTag("devices");
+  return prisma.device.findMany({
     orderBy: {
       id: "asc",
     },
@@ -9,7 +12,10 @@ export default async function () {
       sensors: true,
     },
   });
+}
 
+export default async function () {
+  const devices = await getDevices();
   return (
     <div>
       <button type={"button"}>devices</button>

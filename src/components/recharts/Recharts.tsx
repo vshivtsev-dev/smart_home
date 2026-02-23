@@ -62,6 +62,7 @@ export function Recharts({
       />
       {config.lines.map((line) => (
         <Line
+          isAnimationActive={false}
           key={line.key}
           type="monotone"
           dataKey={line.key as string}

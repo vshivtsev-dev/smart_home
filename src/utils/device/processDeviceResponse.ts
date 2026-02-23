@@ -1,3 +1,4 @@
+import {updateTag} from "next/cache";
 import type {Device} from "@/generated/prisma/client";
 import {devLog} from "@/helpers/devLog";
 import {compareSensorResponseWithConfig} from "@/utils/device/compareSensorResponseWithConfig";
@@ -23,11 +24,13 @@ export async function processDeviceResponse(
         {
           const sensorResponse = currentSensor[sensor.name] as ClimateResponse;
           await insertClimate(sensor.id, sensorResponse);
+          updateTag("climate");
         }
         break;
       case "SOIL": {
         const sensorResponse = currentSensor[sensor.name] as SoilResponse;
         await compareSensorResponseWithConfig(device, sensor, sensorResponse);
+        updateTag("climate");
       }
     }
   }
