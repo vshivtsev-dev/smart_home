@@ -1,37 +1,40 @@
-import {updateTag} from "next/cache";
 import type {Device} from "@/generated/prisma/client";
 import {devLog} from "@/helpers/devLog";
+import {ClimateRepository} from "@/repositories/climate.repository";
+import {SensorRepository} from "@/repositories/sensor.repository";
 import {compareSensorResponseWithConfig} from "@/utils/device/compareSensorResponseWithConfig";
-import {getSensors} from "@/utils/device/getSensors";
-import {insertClimate} from "@/utils/device/insertClimate";
 import type {ClimateResponse, SensorResponse, SoilResponse,} from "@/utils/device/model";
 
 export async function processDeviceResponse(
   device: Device,
   deviceResponse: SensorResponse[],
 ) {
-  const sensors = await getSensors(device.id);
+  const sensors = await SensorRepository.getSensorsByDeviceId(device.id);
   for (const sensor of sensors) {
     const currentSensor = deviceResponse.find(
-      (responseSensor) => Object.keys(responseSensor)[0] === sensor.name,
+      (responseSensor) => sensor.name in responseSensor,
     );
     if (!currentSensor) {
       devLog(`no currentSensor ${sensor.name} ${sensor.target}`);
-      return;
+      continue;
     }
-    switch (sensor.type) {
-      case "CLIMATE":
-        {
-          const sensorResponse = currentSensor[sensor.name] as ClimateResponse;
-          await insertClimate(sensor.id, sensorResponse);
-          updateTag("climate");
+    try {
+      switch (sensor.type) {
+        case "CLIMATE":
+          {
+            const sensorResponse = currentSensor[
+              sensor.name
+            ] as ClimateResponse;
+            await ClimateRepository.createBySensorId(sensor.id, sensorResponse);
+          }
+          break;
+        case "SOIL": {
+          const sensorResponse = currentSensor[sensor.name] as SoilResponse;
+          await compareSensorResponseWithConfig(device, sensor, sensorResponse);
         }
-        break;
-      case "SOIL": {
-        const sensorResponse = currentSensor[sensor.name] as SoilResponse;
-        await compareSensorResponseWithConfig(device, sensor, sensorResponse);
-        updateTag("climate");
       }
+    } catch (error) {
+      console.error(error);
     }
   }
 }

@@ -1,5 +1,5 @@
 import {prisma} from "@/utils/db/prisma/prisma";
-import {getSensorsBody} from "@/utils/device/getSensors";
+import {getSensorsBody} from "@/utils/device/getSensorsBody";
 import {postToDevice} from "@/utils/device/postToDevice";
 
 interface Context {
