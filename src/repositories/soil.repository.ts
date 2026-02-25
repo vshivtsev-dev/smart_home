@@ -1,5 +1,6 @@
-import {cacheTag, updateTag} from "next/cache";
+import {cacheTag} from "next/cache";
 import type {SoilCreateInput} from "@/generated/prisma/models/Soil";
+import {invalidateCacheTag} from "@/helpers/invalidateCacheTag";
 import {prisma} from "@/utils/db/prisma/prisma";
 
 export const SoilRepository = {
@@ -11,7 +12,7 @@ export const SoilRepository = {
       .create({
         data: { sensor: { connect: { id: sensorId } }, ...data },
       })
-      .then(() => updateTag("soil"));
+      .then(() => invalidateCacheTag("soil"));
   },
   async getSoilBySensorId(sensorId: number) {
     "use cache";

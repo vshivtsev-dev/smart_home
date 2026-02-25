@@ -1,5 +1,6 @@
-import {cacheTag, updateTag} from "next/cache";
+import {cacheTag} from "next/cache";
 import type {ClimateCreateInput} from "@/generated/prisma/models/Climate";
+import {invalidateCacheTag} from "@/helpers/invalidateCacheTag";
 import {prisma} from "@/utils/db/prisma/prisma";
 
 export const ClimateRepository = {
@@ -11,7 +12,7 @@ export const ClimateRepository = {
       .create({
         data: { sensor: { connect: { id: sensorId } }, ...data },
       })
-      .then(() => updateTag("climate"));
+      .then(() => invalidateCacheTag("climate"));
   },
   async getClimateBySensorId(sensorId: number) {
     "use cache";
