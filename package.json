@@ -31,8 +31,10 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "pg": "^8.19.0",
     "prisma": "^7.3.0",
     "sass": "^1.97.3",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   },
   "ignoreScripts": [

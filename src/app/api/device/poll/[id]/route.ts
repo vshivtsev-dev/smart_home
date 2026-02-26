@@ -17,8 +17,6 @@ export async function GET(request: Request, context: Context) {
     });
   }
 
-  // const functions = await getDeviceFunctionForIot(1);
-  // const deviceResponse = await postToDevice(device.ip, { functions });
   const sensors = await getSensorsBody(device.id);
   const deviceResponse = await postToDevice(device.ip, { sensors });
   return Response.json(deviceResponse);
