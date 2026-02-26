@@ -1,17 +1,14 @@
 import {getTargetNumber} from "@/helpers/getTargetNumber";
-import {prisma} from "@/utils/db/prisma/prisma";
+import {FunctionRepository} from "@/repositories/functiom.repository";
 import {getPins} from "@/utils/device/getPins";
 
-export async function getDeviceFunction(deviceFunctionId: number) {
-  return prisma.deviceFunction.findUnique({
-    where: { id: deviceFunctionId },
-    include: { config: true },
-  });
-}
-
 export async function getDeviceFunctionBody(deviceFunctionId: number) {
-  const deviceFunction = await getDeviceFunction(deviceFunctionId);
-  if (!deviceFunction || !deviceFunction.config) {
+  const deviceFunction =
+    await FunctionRepository.getFunctionById(deviceFunctionId);
+  const deviceFunctionConfig = await FunctionRepository.getFunctionConfigById(
+    deviceFunction.id,
+  );
+  if (!deviceFunction || !deviceFunctionConfig) {
     return;
   }
 
@@ -22,15 +19,8 @@ export async function getDeviceFunctionBody(deviceFunctionId: number) {
     [functionType]: {
       [targetNumber]: {
         pins,
-        duration: deviceFunction.config.duration,
+        duration: deviceFunctionConfig.duration,
       },
     },
   };
-}
-
-export async function getDeviceFunctionByTarget(target: string) {
-  return prisma.deviceFunction.findFirstOrThrow({
-    where: { target },
-    include: { config: true },
-  });
 }

@@ -1,21 +1,8 @@
-import {cacheTag} from "next/cache";
-import {prisma} from "@/utils/db/prisma/prisma";
-
-async function getDevices() {
-  "use cache";
-  cacheTag("devices");
-  return prisma.device.findMany({
-    orderBy: {
-      id: "asc",
-    },
-    include: {
-      sensors: true,
-    },
-  });
-}
+import {DeviceRepository} from "@/repositories/device.repository";
+import {SensorRepository} from "@/repositories/sensor.repository";
 
 export default async function () {
-  const devices = await getDevices();
+  const devices = await DeviceRepository.getDevices();
   return (
     <div>
       <button type={"button"}>devices</button>
@@ -23,21 +10,26 @@ export default async function () {
         <h1>Devices</h1>
         <table border={1}>
           <tbody>
-            {devices.map((device) => (
-              <tr key={device.id}>
-                <td>{device.id}</td>
-                <td>{device.name}</td>
-                <td>{device.ip}</td>
-                <td>
-                  {device.sensors.map((sensor, index) => (
-                    <span key={sensor.id}>
-                      {sensor.name}
-                      {index !== device.sensors.length - 1 ? ", " : ""}
-                    </span>
-                  ))}
-                </td>
-              </tr>
-            ))}
+            {devices.map(async (device) => {
+              const sensors = await SensorRepository.getSensorsByDeviceId(
+                device.id,
+              );
+              return (
+                <tr key={device.id}>
+                  <td>{device.id}</td>
+                  <td>{device.name}</td>
+                  <td>{device.ip}</td>
+                  <td>
+                    {sensors.map((sensor, index) => (
+                      <span key={sensor.id}>
+                        {sensor.name}
+                        {index !== sensors.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

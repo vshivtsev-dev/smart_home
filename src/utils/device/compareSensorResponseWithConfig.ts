@@ -1,7 +1,8 @@
 import type {Device, Sensor} from "@/generated/prisma/client";
 import {getTargetNumber} from "@/helpers/getTargetNumber";
+import {FunctionRepository} from "@/repositories/functiom.repository";
 import {SoilRepository} from "@/repositories/soil.repository";
-import {getDeviceFunctionBody, getDeviceFunctionByTarget,} from "@/utils/device/getDeviceFunction";
+import {getDeviceFunctionBody} from "@/utils/device/getDeviceFunction";
 import type {SensorResponse, SoilValue} from "@/utils/device/model";
 import {postToDevice} from "@/utils/device/postToDevice";
 
@@ -10,8 +11,12 @@ export async function compareSensorResponseWithConfig(
   sensor: Sensor,
   sensorResponse: SensorResponse,
 ) {
-  const deviceFunction = await getDeviceFunctionByTarget(sensor.target);
-  const functionConfig = deviceFunction.config;
+  const deviceFunction = await FunctionRepository.getFunctionByTarget(
+    sensor.target,
+  );
+  const functionConfig = await FunctionRepository.getFunctionConfigById(
+    deviceFunction.id,
+  );
   const targetNumber = getTargetNumber(sensor.target);
   if (!functionConfig) {
     return;
